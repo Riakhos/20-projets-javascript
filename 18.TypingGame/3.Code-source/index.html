@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Turbo clavier</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+
+    <main class="typing-game-page">
+      <div class="typing-game">
+        <header class="typing-game__header">
+          <h1 class="typing-game__header-title">Turbo Clavier 🔥</h1>
+          <p class="typing-game__help">
+            Appuyer sur 
+            <span class="typing-game__help--key-style">"ctrl"</span>+
+            <span class="typing-game__help--key-style">"alt"</span>+
+            <span class="typing-game__help--key-style">"enter"</span> pour relancer une partie
+          </p>
+          <div class="typing-game__info">
+            <p class="typing-game__info-text  typing-game__info-text--time js-time-left ">Temps : 60</p>
+            <p class="typing-game__info-text typing-game__info-text--score js-score">Score : 0</p>
+          </div>
+          <p class="typing-game__end-game-info"></p>
+        </header>
+        <textarea class="typing-game__textarea"></textarea>
+        <p class="typing-game__sentence-to-write"></p>
+      </div>
+    </main>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

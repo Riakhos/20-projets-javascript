@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App météo</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="weather-app-page">
+      <div class="weather-app">
+        <div class="weather-app__loader-container">
+          <img src="ressources/loader.svg" alt="" class="weather-app__loader" />
+        </div>
+        <p class="weather-app__error-info"></p>
+        <p class="weather-app__city"></p>
+        <p class="weather-app__country"></p>
+        <p class="weather-app__temp"></p>
+        <img src="ressources/icons/11d.svg" alt="" class="weather-app__info-icon">
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

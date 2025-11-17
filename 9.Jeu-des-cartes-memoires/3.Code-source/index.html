@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeu des cartes mémoire</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    </head>
+    <body>
+
+    <main class="memory-game">
+      <header class="memory-game__header">
+        <h1 class="memory-game__title">Jeu des cartes mémoire</h1>
+        <p class="memory-game__advice">Appuyer sur barre d'espace pour reset le jeu.</p>
+        <p class="memory-game__score">Nombre d'essais : 0</p>
+      </header>
+      <ul class="memory-game__grid">
+        <li class="memory-game__card">
+          <div class="memory-game__double-face">
+            <div class="memory-game__face">
+              <img src="ressources/cherry.svg" alt="" class="memory-game__card-img">
+            </div>
+            <div class="memory-game__back">
+              <img src="ressources/question.svg" alt="" class="memory-game__card-img">
+            </div>
+          </div>
+        </li>
+      </ul>
+    </main>
+
+
+    <script src="script.js"></script>
+  </body>
+</html>

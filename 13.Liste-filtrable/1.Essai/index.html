@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recherche d'utilisateurs</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ===========================
+      NAVIGATION PRINCIPALE
+      =========================== -->
+    <nav class="main-nav">
+      <div class="nav-content">
+        <!-- Logo/Accueil -->
+        <a href="../../index.html" class="logo-link">
+          <img src="./assets/Image20241113115512.png" alt="JavaScript Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+        </a>
+
+        <!-- Bouton menu burger (mobile) -->
+        <div class="menu-burger">
+          <img src="./assets/burger.png" alt="Menu" id="burger-menu">
+        </div>
+
+        <!-- Liste des projets -->
+        <ul id="nav-menu">
+          
+          <!-- Groupe 1-5 -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Projets 1-5 ▼</a>
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="../../1.Application-pret-bancaire/1.Essai/index.html">1. Prêt Bancaire</a></li>
+                <li><a href="../../2.Application-meteo/1.Essai/index.html">2. Météo</a></li>
+                <li><a href="../../3.Quizz/1.Essai/index.html">3. Quiz</a></li>
+                <li><a href="../../4.WikiApp/1.Essai/index.html">4. WikiApp</a></li>
+                <li><a href="../../5.Cookies/1.Essai/index.html">5. Cookies</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Groupe 6-10 -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Projets 6-10 ▼</a>
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="../../6.Generateur-de-degrades/1.Essai/index.html">6. Générateur Dégradés</a></li>
+                <li><a href="../../7.Slider/1.Essai/index.html">7. Slider</a></li>
+                <li><a href="../../8.Validation-formulaire/1.Essai/index.html">8. Validation Formulaire</a></li>
+                <li><a href="../../9.Jeu-des-cartes-memoires/1.Essai/index.html">9. Jeu Mémoire</a></li>
+                <li><a href="../../10.Scroll-infini/1.Essai/index.html">10. Scroll Infini</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Groupe 11-15 -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle active">Projets 11-15 ▼</a>
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="../../11.Pomodoro/1.Essai/index.html">11. Pomodoro</a></li>
+                <li><a href="../../12.Generateur-de-mot-de-passe/1.Essai/index.html">12. Générateur Mot de Passe</a></li>
+                <li><a href="./index.html" class="active">13. Liste Filtrable</a></li>
+                <li><a href="../../14.Lecteur-video/1.Essai/index.html">14. Lecteur Vidéo</a></li>
+                <li><a href="../../15.Jeu-du-morpion/1.Essai/index.html">15. Jeu Morpion</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- Groupe 16-20 -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Projets 16-20 ▼</a>
+            <div class="dropdown-menu">
+              <ul>
+                <li><a href="../../16.Particules/1.Essai/index.html">16. Particules</a></li>
+                <li><a href="../../17.Animations/1.Essai/index.html">17. Animations</a></li>
+                <li><a href="../../18.TypingGame/1.Essai/index.html">18. Typing Game</a></li>
+                <li><a href="../../19.Lecteur-audio/1.Essai/index.html">19. Lecteur Audio</a></li>
+                <li><a href="../../20.Calculatrice/1.Essai/index.html">20. Calculatrice</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===========================
+      NAVIGATION LATÉRALE DE L'APPLICATION
+      =========================== -->
+    <aside class="side-nav">
+      <nav>
+        <!-- Logo principal de la section -->
+        <a href="#" class="side-nav__logo-link">
+          <img src="images/logo.svg" alt="Logo" />
+          <span class="side-nav__logo-text">Users</span>
+        </a>
+        
+        <!-- Liens de navigation -->
+        <a href="#" class="side-nav__link">
+          <img src="images/dashboard.svg" alt="" class="side-nav__link-img" />
+          <span class="side-nav__link-text">Dashboard</span>
+        </a>
+        <a href="#" class="side-nav__link">
+          <img src="images/speech-bubble.svg" alt="" class="side-nav__link-img" />
+          <span class="side-nav__link-text">Messenger</span>
+        </a>
+        <!-- Lien actif -->
+        <a href="#" class="side-nav__link js-active-sidenav-link">
+          <img src="images/server.svg" alt="" class="side-nav__link-img" />
+          <span class="side-nav__link-text">Database</span>
+        </a>
+        <a href="#" class="side-nav__link">
+          <img src="images/calendar.svg" alt="" class="side-nav__link-img" />
+          <span class="side-nav__link-text">Calendar</span>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- ===========================
+      CONTENU PRINCIPAL DE L'APPLICATION
+      =========================== -->
+    <main class="user-search-app">
+      
+      <!-- ===========================
+        HEADER DE L'APPLICATION
+        =========================== -->
+      <header class="app-header">
+        <h1 class="app-title">
+          <span class="app-title--main">Recherche</span>
+          <span class="app-title--accent">d'Utilisateurs</span>
+        </h1>
+        <p class="app-description">
+          Trouvez rapidement un utilisateur par nom ou prénom
+        </p>
+      </header>
+
+      <!-- ===========================
+        ZONE DE RECHERCHE
+        =========================== -->
+      <section class="search-section">
+        <div class="search-container">
+          <div class="search-input-wrapper">
+            <label for="user-search" class="search-label">
+              <img src="images/search.svg" alt="" class="user-list__label-logo">
+            </label>
+            <input
+              type="text"
+              id="user-search"
+              class="search-input"
+              placeholder="Rechercher par nom, prénom ou les deux..."
+              aria-label="Recherche d'utilisateurs par nom ou prénom"
+              autocomplete="off"
+            />
+            <button class="search-clear" aria-label="Effacer la recherche">
+              <svg viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+              </svg>
+            </button>
+          </div>
+          
+        <!-- ===========================
+        TITRE DES RÉSULTATS
+        =========================== -->
+        <p class="user-list__text-description">Résultats</p>
+
+          <!-- Informations sur les résultats -->
+          <div class="search-info">
+            <span class="results-count">0 utilisateur(s) trouvé(s)</span>
+            <span class="search-status"></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===========================
+        ZONE D'AFFICHAGE DES RÉSULTATS
+        =========================== -->
+      <section class="results-section">
+        
+        <!-- Loader -->
+        <div class="loader-container" id="loader">
+          <div class="loader">
+            <img src="images/loader.svg" alt="">
+            <p class="loader-text">Chargement des utilisateurs...</p>
+          </div>
+        </div>
+
+        <!-- Message d'erreur -->
+        <div class="error-container" id="error-message">
+          <div class="error-content">
+            <svg class="error-icon" viewBox="0 0 24 24" width="48" height="48">
+              <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <h3 class="error-title">Erreur de chargement</h3>
+            <p class="error-text">Impossible de charger les utilisateurs. Veuillez réessayer.</p>
+            <button class="error-retry-btn" id="retry-btn">Réessayer</button>
+          </div>
+        </div>
+
+        <!-- ===========================
+        TABLEAU DES UTILISATEURS
+        =========================== -->
+        <div class="table-wrapper">
+          <table class="table">
+            <!-- En-têtes du tableau -->
+            <tr>
+              <th class="table__heading">Nom</th>
+              <th class="table__heading">Email</th>
+              <th class="table__heading">Téléphone</th>
+            </tr>
+            
+            <!-- Corps du tableau - Résultats dynamiques -->
+            <tbody class="table__results" id="users-list">
+              <!-- Les utilisateurs seront insérés ici dynamiquement -->
+              <!-- Exemple de ligne d'utilisateur -->
+              <!-- <tr class="table__content-row">
+                <td class="table__data table__data-info">
+                  <div class="table__data-content-wrapper">
+                    <img src="images/server.svg" alt="" class="table__data-img">
+                    <span>Aubert Lorenzo</span>
+                  </div>
+                </td>
+                <td class="table__data table__data-email">
+                  <span>lorenzo.aubert@example.com</span>
+                </td>
+                <td class="table__data table__data-phone">
+                  <span>05-26-85-79-68</span>
+                </td>
+              </tr> -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Message aucun résultat -->
+        <div class="no-results-container" id="no-results">
+          <div class="no-results-content">
+            <img src="images/search.svg" alt="" class="user-list__label-logo">
+            <h3 class="no-results-title">Aucun résultat</h3>
+            <p class="no-results-text">Aucun utilisateur ne correspond à votre recherche.</p>
+            <p class="no-results-suggestion">Essayez avec d'autres termes de recherche.</p>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- ===========================
+      FOOTER DE L'APPLICATION
+      =========================== -->
+    <footer class="app-footer">
+      <p class="footer-info">
+        Données fournies par <a href="https://randomuser.me" target="_blank" rel="noopener">RandomUser.me API</a>
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

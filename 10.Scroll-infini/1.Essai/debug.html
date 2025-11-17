@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug API Unsplash</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="debug-style.css">
+</head>
+<body>
+    <!-- ===========================
+         EN-TÊTE PRINCIPAL
+         =========================== -->
+    <h1>🔧 Debug Configuration API Unsplash</h1>
+    
+    <!-- ===========================
+         SECTION 1: VÉRIFICATION CONFIG
+         =========================== -->
+    <div class="debug-section">
+        <h2>1. Vérification de la configuration</h2>
+        <div id="config-check"></div>
+    </div>
+    
+    <!-- ===========================
+         SECTION 2: TEST DE L'API
+         =========================== -->
+    <div class="debug-section">
+        <h2>2. Test de l'API</h2>
+        <button onclick="testAPI()">🚀 Tester l'API</button>
+        <div id="api-result"></div>
+    </div>
+    
+    <!-- ===========================
+         SECTION 3: INSTRUCTIONS
+         =========================== -->
+    <div class="debug-section">
+        <h2>3. Instructions</h2>
+        <ol>
+            <li>Allez sur <a href="https://unsplash.com/developers" target="_blank" rel="noopener">https://unsplash.com/developers</a></li>
+            <li>Créez un compte et une nouvelle application</li>
+            <li>Copiez votre "Access Key"</li>
+            <li>Modifiez le fichier <code>config.js</code> avec votre clé</li>
+            <li>Rechargez cette page et cliquez sur "Tester l'API"</li>
+        </ol>
+    </div>
+
+    <!-- ===========================
+         SCRIPTS JAVASCRIPT
+         =========================== -->
+    <!-- Configuration API -->
+    <script src="config.js"></script>
+    
+    <!-- Logique de debug -->
+    <script>
+        /* ===========================
+           FONCTIONS DE VÉRIFICATION
+           =========================== */
+        
+        // Vérification de la configuration
+        function checkConfig() {
+            const configDiv = document.getElementById('config-check');
+            
+            if (typeof window.API_CONFIG === 'undefined') {
+                configDiv.innerHTML = '<p class="error">❌ Fichier config.js non trouvé ou mal configuré</p>';
+                return false;
+            }
+            
+            const { API_KEY, API_URL } = window.API_CONFIG;
+            
+            if (!API_KEY || API_KEY === 'YOUR_API_KEY_HERE') {
+                configDiv.innerHTML = '<p class="error">❌ Clé API non configurée dans config.js</p>';
+                return false;
+            }
+            
+            configDiv.innerHTML = `
+                <p class="success">✅ Configuration trouvée</p>
+                <p class="info">📡 URL API: ${API_URL}</p>
+                <p class="info">🔑 Clé API: ${API_KEY.substring(0, 10)}...</p>
+            `;
+            return true;
+        }
+        
+        /* ===========================
+           FONCTIONS DE TEST API
+           =========================== */
+        
+        // Test de l'API
+        async function testAPI() {
+            const resultDiv = document.getElementById('api-result');
+            
+            if (!checkConfig()) {
+                resultDiv.innerHTML = '<p class="error">Impossible de tester sans configuration valide</p>';
+                return;
+            }
+            
+            const { API_KEY, API_URL } = window.API_CONFIG;
+            const testUrl = `${API_URL}?query=nature&page=1&per_page=1&client_id=${API_KEY}`;
+            
+            resultDiv.innerHTML = '<p class="info">🔄 Test en cours...</p>';
+            
+            try {
+                const response = await fetch(testUrl);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <p class="success">✅ API fonctionnelle!</p>
+                        <p class="info">📊 Total d'images disponibles: ${data.total}</p>
+                        <p class="info">📸 Images récupérées: ${data.results.length}</p>
+                        <details>
+                            <summary>Voir la réponse complète</summary>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </details>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <p class="error">❌ Erreur ${response.status}: ${response.statusText}</p>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">❌ Erreur réseau: ${error.message}</p>`;
+            }
+        }
+        
+        /* ===========================
+           INITIALISATION DE LA PAGE
+           =========================== */
+        
+        // Vérification automatique au chargement
+        window.onload = () => {
+            checkConfig();
+        };
+    </script>
+</body>
+</html>

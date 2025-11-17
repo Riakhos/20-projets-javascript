@@ -1,0 +1,133 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Lato, Helvetica, sans-serif;
+  color: #111;
+}
+
+.loan-app-page {
+  min-height: 100vh;
+  padding: 75px 10px 30px;
+  background-image: radial-gradient(at center, #f0f0f0, #e4e4e4);
+}
+.loan-app {
+  max-width: 850px;
+  border: 1px solid #c8c8c8;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.loan-app__form {
+  padding: 30px;
+  border-bottom: 1px solid #c8c8c8;
+}
+.loan-app__inputs-container {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 35px;
+}
+.loan-app__input-group {
+  width: 100%;
+}
+.loan-app__label {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+.loan-app__label--info {
+  margin-right: 8px;
+}
+.loan-app__label--figure {
+  font-family: Raleway, sans-serif;
+  font-size: 32px;
+  color: #4caf50;
+  font-weight: 900;
+}
+
+.loan-app__range-input {
+  appearance: none;
+  width: 100%;
+  margin: 40px 0 20px;
+  height: 2px;
+  background-color: #9f9f9f;
+  opacity: 0.7;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.loan-app__range-input:hover {
+  opacity: 1;
+}
+
+.loan-app__range-input::-webkit-slider-thumb {
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  background-color: #58d32b;
+  cursor: pointer;
+  border-radius: 50%;
+  background-image: url("./assets/left-right.svg");
+  background-size: cover;
+}
+
+.loan-app__range-input::-moz-range-thumb {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  background-color: #58d32b;
+  cursor: pointer;
+  border-radius: 50%;
+  background-image: url("./assets/left-right.svg");
+  background-size: cover;
+}
+
+.loan-app__loan-limits {
+  display: flex;
+  justify-content: space-between;
+}
+.loan-app__loan-limit {
+  font-weight: 600;
+}
+.loan-app__results {
+  padding: 50px 20px 60px;
+  text-align: center;
+}
+.loan-app__description {
+  font-family: Raleway, sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
+.loan-app__description--styled-txt {
+  font-weight: 700;
+}
+.loan-app__result {
+  margin-bottom: 38px;
+  font-size: 17px;
+}
+.loan-app__info {
+  font-weight: 600;
+}
+.loan-app__result-value {
+  font-family: Raleway, sans-serif;
+  font-size: 36px;
+  font-weight: 900;
+  color: #4caf50;
+}
+
+/* Responsive */
+
+@media (width <= 820px) {
+  .loan-app__inputs-container {
+    flex-direction: column;
+  }
+  .loan-app__label {
+    display: block;
+    text-align: center;
+  }
+}

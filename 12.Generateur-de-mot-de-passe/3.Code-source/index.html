@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Générateur de mot de passe</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="pwd-generator-page">
+      <div class="pwd-generator">
+        <p class="pwd-generator__desc">Générateur de mot de passe</p>
+        <div class="pwd-generator__result">
+          <p class="pwd-generator__generated-pwd"></p>
+          <button class="pwd-generator__copy-btn">
+            <img
+              src="ressources/copy.svg"
+              alt="Copier le mot de passe"
+              class="pwd-generator__copy-icon"
+            />
+          </button>
+        </div>
+        <div class="pwd-generator__range-group">
+          <label for="range" class="pwd-generator__range-label"
+            >Taille du mot de passe : 10</label
+          >
+          <input
+            type="range"
+            id="range"
+            class="pwd-generator__range-input"
+            min="4"
+            max="20"
+            value="10"
+          />
+        </div>
+        <div class="pwd-generator__checkboxes">
+          <p class="pwd-generator__checkboxes-desc">Options de génération : </p>
+          <div class="pwd-generator__checkbox-group">
+            <input
+              id="lowercaseChars"
+              type="checkbox"
+              class="pwd-generator__checkbox"
+              checked
+            />
+            <label for="lowercaseChars" class="pwd-generator__checkbox-label">
+              Contient des caractères minuscules
+            </label>
+          </div>
+
+          <div class="pwd-generator__checkbox-group">
+            <input
+              id="uppercaseChars"
+              type="checkbox"
+              class="pwd-generator__checkbox"
+              checked
+            />
+            <label for="uppercaseChars" class="pwd-generator__checkbox-label">
+              Contient des caractères majuscules
+            </label>
+          </div>
+
+          <div class="pwd-generator__checkbox-group">
+            <input
+              id="numbers"
+              type="checkbox"
+              class="pwd-generator__checkbox"
+              checked
+            />
+            <label for="numbers" class="pwd-generator__checkbox-label">
+              Contient des nombres
+            </label>
+          </div>
+
+          
+          <div class="pwd-generator__checkbox-group">
+            <input
+              id="symbols"
+              type="checkbox"
+              class="pwd-generator__checkbox"
+              checked
+            />
+            <label for="symbols" class="pwd-generator__checkbox-label">
+              Contient des symboles spéciaux
+            </label>
+          </div>
+
+        </div>
+        <button class="pwd-generator__generate-pwd-btn">Générer</button>
+        <p class="pwd-generator__error-msg"></p>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

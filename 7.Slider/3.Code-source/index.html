@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider JS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="slider-page">
+      <div class="slider">
+        <button 
+        data-direction="-1"
+        class="slider__direction-btn slider__direction-btn--left"
+        title="Précédent">
+          <img
+            src="ressources/left-chevron.svg"
+            alt=""
+            class="slider__direction-btn-img"
+          />
+        </button>
+        <button 
+        data-direction="1"
+        class="slider__direction-btn slider__direction-btn--right"
+        title="Suivant">
+          <img
+            src="ressources/right-chevron.svg"
+            alt=""
+            class="slider__direction-btn-img"
+          />
+        </button>
+        <div class="slider__slide slider__slide--1 js-active-slide">
+          <div class="slider__slide-content">
+            <img src="ressources/cat-1.jpg" alt="image de chat" class="slider__slide-img">
+            <p class="slider__slide-title">Slide 1</p>
+            <p class="slider__slide-subtitle">Sous-titre</p>
+            <button class="slider__slide-btn">S'abonner</button>
+          </div>
+        </div>
+        <div class="slider__slide slider__slide--2 ">
+          <div class="slider__slide-content">
+            <img src="ressources/cat-2.jpg" alt="image de chat" class="slider__slide-img">
+            <p class="slider__slide-title">Slide 2</p>
+            <p class="slider__slide-subtitle">Sous-titre</p>
+            <button class="slider__slide-btn">S'abonner</button>
+          </div>
+        </div>
+        <div class="slider__slide slider__slide--3 ">
+          <div class="slider__slide-content">
+            <img src="ressources/cat-3.jpg" alt="image de chat" class="slider__slide-img">
+            <p class="slider__slide-title">Slide 3</p>
+            <p class="slider__slide-subtitle">Sous-titre</p>
+            <button class="slider__slide-btn">S'abonner</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App création de dégradés linéaires</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="gradient-app">
+      <div class="gradient-app__container">
+        <div class="gradient-app__input-group">
+          <label for="gradient-color-1" class="gradient-app__color-label">
+            #FF5F6D
+          </label>
+          <input
+            type="color"
+            class="gradient-app__color-input"
+            id="gradient-color-1"
+          />
+        </div>
+        <div class="gradient-app__input-group">
+          <label for="gradient-color-2" class="gradient-app__color-label">
+            #FFC371
+          </label>
+          <input
+            type="color"
+            class="gradient-app__color-input"
+            id="gradient-color-2"
+          />
+        </div>
+        <div class="gradient-app__range-group">
+          <label for="orientation" class="gradient-app__range-label">
+            <span>Orientation :</span>
+            <span class="gradient-app__orientation-value">90°</span>
+          </label>
+          <input 
+          type="range"
+          class="gradient-app__range"
+          id="orientation"
+          min="0"
+          max="360"
+          value="90"
+          >
+        </div>
+        <div class="gradient-app__buttons">
+          <button class="gradient-app__button gradient-app__copy-button js-copy-button">
+            Copier
+          </button>
+          <button
+          aria-label="Générer un dégradé linéaire au hasard"
+          class="gradient-app__button js-random-btn">
+            🎲
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

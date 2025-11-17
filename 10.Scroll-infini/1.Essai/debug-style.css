@@ -1,0 +1,254 @@
+/* ===========================
+   RESET CSS ET CONFIGURATION DE BASE
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===========================
+   STYLES GÉNÉRAUX DU BODY
+   =========================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    color: #222;
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+/* ===========================
+   TITRE PRINCIPAL AVEC ANIMATION
+   =========================== */
+h1 {
+    text-align: center;
+    color: #222;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Animation shimmer pour le titre */
+@keyframes shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* ===========================
+   SECTIONS DE DEBUG
+   =========================== */
+.debug-section {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: rgba(51, 51, 51, 0.9);
+    border: 2px solid #f7df1e;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+/* Effet de survol des sections */
+.debug-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Titres des sections */
+.debug-section h2 {
+    color: #f7df1e;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ===========================
+   MESSAGES D'ÉTAT
+   =========================== */
+.success {
+    color: #4CAF50;
+    font-weight: bold;
+    background: rgba(76, 175, 80, 0.1);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #4CAF50;
+}
+
+.error {
+    color: #f44336;
+    font-weight: bold;
+    background: rgba(244, 67, 54, 0.1);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #f44336;
+}
+
+.info {
+    color: #f5f7fa;
+    background: rgba(247, 223, 30, 0.1);
+    padding: 0.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #f7df1e;
+}
+
+/* ===========================
+   BOUTONS INTERACTIFS
+   =========================== */
+button {
+    background: linear-gradient(45deg, #f7df1e, #ffd700);
+    color: #222;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(247, 223, 30, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* États de survol et d'activation des boutons */
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(247, 223, 30, 0.6);
+    background: linear-gradient(45deg, #ffd700, #f7df1e);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* ===========================
+   BLOCKS DE CODE ET PRES
+   =========================== */
+pre {
+    background: rgba(0, 0, 0, 0.3);
+    color: #f5f7fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    overflow-x: auto;
+    border: 1px solid #f7df1e;
+    font-family: 'Courier New', monospace;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* ===========================
+   LISTES ET NAVIGATION
+   =========================== */
+ol {
+    color: #f5f7fa;
+    padding-left: 2rem;
+}
+
+ol li {
+    margin: 1rem 0;
+    line-height: 1.8;
+}
+
+/* ===========================
+   LIENS ET NAVIGATION
+   =========================== */
+a {
+    color: #f7df1e;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+a:hover {
+    color: #ffd700;
+    border-bottom-color: #f7df1e;
+    text-shadow: 0 0 10px rgba(247, 223, 30, 0.5);
+}
+
+/* ===========================
+   ÉLÉMENTS DE CODE INLINE
+   =========================== */
+code {
+    background: rgba(247, 223, 30, 0.2);
+    color: #f7df1e;
+    padding: 0.3rem 0.6rem;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+/* ===========================
+   ÉLÉMENTS EXPANSIBLES
+   =========================== */
+details {
+    margin-top: 1rem;
+}
+
+summary {
+    cursor: pointer;
+    color: #f7df1e;
+    font-weight: bold;
+    padding: 0.5rem;
+    background: rgba(247, 223, 30, 0.1);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+summary:hover {
+    background: rgba(247, 223, 30, 0.2);
+    transform: translateX(5px);
+}
+
+/* ===========================
+   ANIMATIONS D'APPARITION
+   =========================== */
+.debug-section {
+    opacity: 0;
+    animation: slideInFromBottom 0.6s ease forwards;
+}
+
+/* Délais d'animation en cascade */
+.debug-section:nth-child(2) { animation-delay: 0.1s; }
+.debug-section:nth-child(3) { animation-delay: 0.2s; }
+.debug-section:nth-child(4) { animation-delay: 0.3s; }
+
+/* Animation de glissement depuis le bas */
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .debug-section {
+        padding: 1.5rem;
+    }
+    
+    button {
+        width: 100%;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,687 @@
+/* ===========================
+  NAVIGATION PRINCIPALE
+  =========================== */
+nav.main-nav {
+  background: #222;
+  padding: 1em 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+nav.main-nav .nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1em;
+  position: relative;
+}
+
+/* Logo */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.2em 0.8em;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.logo-link:hover .logo-img {
+  transform: scale(1.12);
+  box-shadow: 0 0 12px 2px #f7df1e, 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-fallback {
+  color: #f7df1e;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Menu burger */
+.menu-burger {
+  display: none;
+  position: absolute;
+  right: 0.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+}
+
+.menu-burger img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.25s;
+}
+
+.menu-burger img:hover {
+  transform: scale(1.1);
+}
+
+/* Navigation liste */
+nav.main-nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  list-style: none;
+  margin: 0;
+  padding: -1px;
+}
+
+nav.main-nav ul li {
+  position: relative;
+}
+
+nav.main-nav ul li>a {
+  color: #f7df1e;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: block;
+  white-space: nowrap;
+}
+
+nav.main-nav ul li>a:hover {
+  background: #f7df1e;
+  color: #222;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px 2px #f7df1e, 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* États actifs pour les liens de navigation */
+nav.main-nav ul li>a.active {
+  background: #f7df1e;
+  color: #222;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px 2px #f7df1e, 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdowns */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #333;
+  border: 2px solid #f7df1e;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+  padding: 0.5em 0;
+}
+
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Animation d'entrée en cascade */
+.dropdown.active .dropdown-menu li {
+  animation: slideInFromLeft 0.3s ease forwards;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu li {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 0.8em 1.2em;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9em;
+  border-radius: 0;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.dropdown-menu li:last-child a {
+  border-bottom: none;
+}
+
+.dropdown-menu li:first-child a {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.dropdown-menu li a:hover {
+  background: #f7df1e;
+  color: #222;
+  transform: translateX(5px);
+  padding-left: 1.5em;
+}
+
+/* États actifs pour les liens dans les dropdowns */
+.dropdown-menu li a.active {
+  background: rgba(247, 223, 30, 0.2);
+  color: #f7df1e;
+  border-left: 3px solid #f7df1e;
+}
+
+/* ===========================
+  BASE ET LAYOUT
+  =========================== */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  color: #222;
+  text-align: center;
+  line-height: 1.6;
+  padding-top: 80px;
+}
+
+/* ===========================
+  WIKI APP - DESIGN MODERNISÉ
+  =========================== */
+.wiki-app {
+  min-height: 100vh;
+  padding: 80px 20px 100px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.wiki-app__logo {
+  width: 200px;
+  display: block;
+  margin: 0 auto 20px;
+  transition: transform 0.3s ease;
+}
+
+.wiki-app__logo:hover {
+  transform: scale(1.05);
+}
+
+.wiki-app__main-title {
+  font-size: 40px;
+  color: #222;
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wiki-app__main-title--style {
+  font-weight: 800;
+  color: #f7df1e;
+  text-shadow: 0 0 10px rgba(247, 223, 30, 0.3);
+}
+
+.wiki-app__search {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2em;
+  background: #222;
+  border-radius: 16px;
+  box-shadow: 0 0 12px 2px #f7df1e, 0 2px 8px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.wiki-app__form {
+  display: flex;
+  margin-bottom: 24px;
+  gap: 15px;
+}
+
+.wiki-app__form-search-input {
+  flex: 1;
+  padding: 18px 24px;
+  font-size: 18px;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #222;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.wiki-app__form-search-input:focus {
+  outline: none;
+  border-color: #f7df1e;
+  box-shadow: 0 0 20px rgba(247, 223, 30, 0.3), 0 4px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.wiki-app__form-search-input::placeholder {
+  color: #888;
+}
+
+.wiki-app__submit-btn {
+  min-width: 140px;
+  padding: 18px 32px;
+  background: #222;
+  color: #f7df1e;
+  border: 2px solid #222;
+  border-color: #f7df1e;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.wiki-app__submit-btn:hover {
+  background: #f7df1e;
+  color: #222;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(247, 223, 30, 0.4), 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.wiki-app__submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.wiki-app__error-msg {
+  display: none;
+  text-align: center;
+  color: #e74c3c;
+  margin-bottom: 30px;
+  padding: 15px;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.wiki-app__error-msg.show {
+  display: block;
+  animation: slideInError 0.3s ease forwards;
+}
+
+@keyframes slideInError {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wiki-app__loader {
+  display: none;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.js-active-loader {
+  display: flex;
+}
+
+.wiki-app__loader-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f7df1e;
+  margin: 0 6px;
+  animation: load 0.6s infinite ease-in-out alternate;
+  box-shadow: 0 0 15px rgba(247, 223, 30, 0.4);
+}
+
+.wiki-app__loader-dot--delay-1 {
+  animation-delay: -0.4s;
+}
+
+.wiki-app__loader-dot--delay-2 {
+  animation-delay: -0.2s;
+}
+
+.wiki-app__loader-dot--delay-3 {
+  animation-delay: 0s;
+}
+
+@keyframes load {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(-20px) scale(1.2);
+    opacity: 1;
+  }
+}
+
+.wiki-app__result-item {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #f7df1e;
+}
+
+.wiki-app__result-item:hover {
+  transform: translateY(-3px);
+  border-left: 6px solid #f7df1e;
+  border: 2px solid #f7df1e;
+  box-shadow: 0 0 25px rgba(247, 223, 30, 0.4), 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.wiki-app__result-title {
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.wiki-app__result-link-title {
+  color: #222;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+.wiki-app__result-link-title:hover {
+  color: #f7df1e;
+  text-shadow: 0 0 10px rgba(247, 223, 30, 0.3);
+  transform: translateX(5px);
+}
+
+.wiki-app__result-link-title:visited {
+  color: #555;
+}
+
+.wiki-app__result-link-title:visited:hover {
+  color: #f7df1e;
+  text-shadow: 0 0 10px rgba(247, 223, 30, 0.3);
+}
+
+.wiki-app__result-snippet {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ===========================
+  RESPONSIVE WIKI APP
+  =========================== */
+@media (width <=500px) {
+  .wiki-app__search {
+    margin: 0 1em;
+    padding: 1.5em;
+  }
+
+  .wiki-app__form {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .wiki-app__form-search-input {
+    margin-bottom: 0;
+  }
+
+  .wiki-app__submit-btn {
+    padding: 16px;
+    min-width: auto;
+  }
+
+  .wiki-app__main-title {
+    font-size: 32px;
+  }
+}
+
+/* ===========================
+  RESPONSIVE NAVIGATION
+  =========================== */
+@media (width <=820px) {
+
+  /* Navigation responsive */
+  nav.main-nav .nav-content {
+    flex-direction: row;
+    padding: 0 0.5em;
+  }
+
+  .menu-burger {
+    display: block !important;
+  }
+
+  nav.main-nav ul {
+    display: none;
+    flex-direction: column;
+    background: #222;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100vw;
+    z-index: 150;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 12px 12px;
+    margin: 0;
+    padding: 0.5em 0;
+  }
+
+  nav.main-nav ul.open {
+    display: flex;
+  }
+
+  nav.main-nav ul li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #444;
+  }
+
+  nav.main-nav ul li:last-child {
+    border-bottom: none;
+  }
+
+  nav.main-nav ul li>a {
+    color: #fff !important;
+    background: none !important;
+    padding: 1em 0;
+    display: block;
+    font-weight: bold;
+    border-radius: 0;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  nav.main-nav ul li>a:hover,
+  nav.main-nav ul li>a.active {
+    background: #f7df1e !important;
+    color: #222 !important;
+  }
+
+  /* Ajuster l'espacement pour le menu mobile */
+  nav.main-nav ul {
+    gap: 0;
+  }
+}
+
+/* ===========================
+   RESPONSIVE DROPDOWNS MOBILE - FIX
+   =========================== */
+@media (max-width: 820px) {
+
+  /* Force l'affichage des dropdowns en mode modal pour mobile */
+  .dropdown-menu {
+    position: fixed !important;
+    top: 30% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 300px !important;
+    z-index: 1001 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .dropdown.active .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  /* Overlay sombre derrière la dropdown */
+  .dropdown.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+  }
+
+  /* Style des éléments de la liste en mobile */
+  .dropdown-menu ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+    background: #333 !important;
+    border: 2px solid #f7df1e !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .dropdown-menu li {
+    opacity: 1 !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    border-bottom: 1px solid #444 !important;
+  }
+
+  .dropdown-menu li:last-child {
+    border-bottom: none !important;
+  }
+
+  .dropdown-menu li a {
+    display: block !important;
+    padding: 1em 1.2em !important;
+    font-size: 0.95em !important;
+    text-align: left !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .dropdown-menu li:first-child a {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+  }
+
+  .dropdown-menu li:last-child a {
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+  }
+
+  .dropdown-menu li a:hover {
+    background: #f7df1e !important;
+    color: #222 !important;
+    transform: translateX(5px) !important;
+    padding-left: 1.5em !important;
+  }
+
+  .dropdown-menu li a.active {
+    background: rgba(247, 223, 30, 0.2) !important;
+    color: #f7df1e !important;
+    border-left: 3px solid #f7df1e !important;
+  }
+
+  /* Désactiver les animations en cascade pour mobile */
+  .dropdown.active .dropdown-menu li {
+    animation: none !important;
+  }
+}

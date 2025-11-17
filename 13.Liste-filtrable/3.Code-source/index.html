@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recherche d'utilisateurs</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <aside class="side-nav">
+      <nav>
+        <a href="#" class="side-nav__logo-link">
+          <img src="images/logo.svg" alt="Logo" />
+          <span class="side-nav__logo-text">Users</span>
+        </a>
+        <a href="#" class="side-nav__link">
+          <img src="images/dashboard.svg" alt="" class="side-nav__link-img" />
+          <span class="side-nav__link-text">Dashboard</span>
+        </a>
+        <a href="#" class="side-nav__link">
+          <img
+            src="images/speech-bubble.svg"
+            alt=""
+            class="side-nav__link-img"
+          />
+          <span class="side-nav__link-text">Messenger</span>
+        </a>
+        <a href="#" class="side-nav__link js-active-sidenav-link">
+          <img src="images/server.svg" alt="" class="side-nav__link-img" />
+          <span class="side-nav__link-text">Database</span>
+        </a>
+        <a href="#" class="side-nav__link">
+          <img src="images/calendar.svg" alt="" class="side-nav__link-img" />
+          <span class="side-nav__link-text">Calendar</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="user-list">
+      <div class="user-list__input-control">
+        <label for="search" class="user-list__label">
+          <img src="images/search.svg" alt="" class="user-list__label-logo" />
+        </label>
+        <input
+          type="text"
+          class="user-list__input"
+          id="search"
+          placeholder="Recherche par nom, prénom, ou les deux"
+          aria-label="Recherche par nom, prénom, ou les deux"
+        />
+      </div>
+      <p class="user-list__text-description">Résultats</p>
+
+      <div class="table-wrapper">
+        <table class="table">
+          <tr>
+            <th class="table__heading">Nom</th>
+            <th class="table__heading">Email</th>
+            <th class="table__heading">Téléphone</th>
+          </tr>
+          <tbody class="table__results">
+            <!-- <tr class="table__content-row">
+              <td class="table__data table__data-info">
+                <div class="table__data-content-wrapper">
+                  <img src="images/server.svg" alt="" class="table__data-img" />
+                  <span>Aubert Lorenzo.</span>
+                </div>
+              </td>
+              <td class="table__data table__data-email">
+                <span>lorenzo.aubert@example.com.</span>
+              </td>
+              <td class="table__data table__data-phone">
+                <span>05-26-85-79-68.</span>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+
+      <p class="user-list__server-info"></p>
+      <div class="user-list__loader">
+        <img src="images/loader.svg" alt="">
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

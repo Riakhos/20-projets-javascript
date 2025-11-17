@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Wikipedia</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="wiki-app">
+      <header>
+        <img src="ressources/wiki-logo.png" alt="Logo Wikipedia" class="wiki-app__logo">
+        <h1 class="wiki-app__main-title">Recherche <span class="wiki-app__main-title--style">Wikipedia</span></h1>
+      </header>
+      <div class="wiki-app__search">
+        <form class="wiki-app__form">
+          <input 
+          type="text"
+          class="wiki-app__form-search-input"
+          placeholder="Rechercher quelque chose"
+          >
+          <button class="wiki-app__submit-btn">Rechercher</button>
+        </form>
+        <p class="wiki-app__error-msg"></p>
+        <div class="wiki-app__results">
+
+
+
+        </div>
+        <div class="wiki-app__loader">
+          <span class="wiki-app__loader-dot wiki-app__loader-dot--delay-1"></span>
+          <span class="wiki-app__loader-dot wiki-app__loader-dot--delay-2"></span>
+          <span class="wiki-app__loader-dot wiki-app__loader-dot--delay-3"></span>
+        </div>
+      </div>
+    </main>
+    
+    <script src="script.js"></script>
+  </body>
+</html>

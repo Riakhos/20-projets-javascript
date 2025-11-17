@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculateur de prêt</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="loan-app-page">
+      <div class="loan-app">
+        <form class="loan-app__form">
+          <div class="loan-app__inputs-container">
+            <div class="loan-app__input-group">
+              <label for="loan-amount" class="loan-app__label">
+                <span class="loan-app__label--info">Montant du prêt :</span>
+                <span class="loan-app__label--figure js-loan-amount"
+                  >10,000€</span
+                >
+              </label>
+              <input
+                type="range"
+                class="loan-app__range-input"
+                id="loan-amount"
+                min="5000"
+                max="15000"
+                step="100"
+              />
+              <div class="loan-app__loan-limits">
+                <p class="loan-app__loan-limit">5000 €</p>
+                <p class="loan-app__loan-limit">15000 €</p>
+              </div>
+            </div>
+            <div class="loan-app__input-group">
+              <label for="repayment" class="loan-app__label">
+                <span class="loan-app__label--info"
+                  >Remboursement (en mois) :</span
+                >
+                <span class="loan-app__label--figure js-repayment-duration"
+                  >42</span
+                >
+              </label>
+              <input
+                type="range"
+                class="loan-app__range-input"
+                id="repayment"
+                min="12"
+                max="72"
+              />
+              <div class="loan-app__loan-limits">
+                <p class="loan-app__loan-limit">12</p>
+                <p class="loan-app__loan-limit">72</p>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="loan-app__results">
+          <p class="loan-app__description">
+            <span class="loan-app__description--styled-txt">Calculateur</span>
+            de prêt - Taux fixe à 7%
+          </p>
+          <div class="loan-app__result">
+            <p class="loan-app__result-info">Total :</p>
+            <p class="loan-app__result-value js-total-value">10,700€</p>
+          </div>
+          <div class="loan-app__result">
+            <p class="loan-app__result-info">Paiement par mois :</p>
+            <p class="loan-app__result-value js-monthly-payment">255€</p>
+          </div>
+          <div class="loan-app__result">
+            <p class="loan-app__result-info">Intérêt total :</p>
+            <p class="loan-app__result-value js-total-interest">700€</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

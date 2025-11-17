@@ -1,0 +1,108 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Open sans, Helvetica, sans-serif;
+}
+
+.sign-up-page {
+  min-height: 100vh;
+  background-image: linear-gradient(to right, #d9a7c7, #fffcdc);
+  padding: 80px 20px 50px;
+}
+.sign-up {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #212121;
+  color: #f1f1f1;
+  border-radius: 5px;
+}
+.js-shake-animation {
+  animation: shake 0.4s;
+}
+@keyframes shake {
+  33% {
+    transform: translateX(-5px);
+  }
+  66% {
+    transform: translateX(5px);
+  }
+}
+.sign-up__title {
+  font-size: 30px;
+  font-family: Raleway, sans-serif;
+  text-align: center;
+  margin-bottom: 45px;
+}
+.sign-up__input-group {
+  margin-bottom: 30px;
+}
+.sign-up__label {
+  font-size: 20px;
+}
+.sign-up__input {
+  display: block;
+  width: 100%;
+  font-size: 18px;
+  color: #f1f1f1;
+  padding: 10px 50px 10px 0;
+  background-color: transparent;
+  border: none;
+  outline: 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #212121 inset !important;
+  -webkit-text-fill-color: #f1f1f1;
+}
+.sign-up__input:focus {
+  box-shadow: 0 1px 0 #fff;
+}
+.sign-up__input::placeholder {
+  font-size: 16px;
+}
+.sign-up__icon-input-container {
+  position: relative;
+}
+.sign-up__check-icon {
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  display: none;
+}
+.sign-up__error-msg {
+  margin-top: 9px;
+  color: #f75252;
+  font-weight: 400;
+  display: none;
+}
+.sign-up__password-info {
+  color: #a9a9a9;
+  font-weight: 400;
+  font-size: 14px;
+  margin: 2px 0 10px;
+}
+.sign-up__submit-button {
+  display: block;
+  margin: 60px auto 10px;
+  font-size: 18px;
+  padding: 12px 18px;
+  background-color: #fffcdc;
+  border: 1px solid #f1f1f13d;
+  color: #111;
+  border-radius: 3px;
+  font-family: Raleway, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sign-up__submit-button:hover {
+  background-color: #e3dfa2;
+}

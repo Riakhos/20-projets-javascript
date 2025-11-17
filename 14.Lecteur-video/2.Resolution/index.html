@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Video Player</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+
+    <main class="video-page">
+      <header>
+        <h1 class="video-page__title">Lecteur
+        <span class="video-page__title--style">personnalisé</span></h1>
+      </header>
+      <div class="video">
+        <video class="video__player">
+            <source src="ressources/video.mp4" type="video/mp4"></source>
+        </video>
+        <div class="video__controls">
+          <div class="video__progress">
+            <div class="video__progress-bar"></div>
+          </div>
+          
+          <div class="video__controls-container">
+            
+            <button class="video__controller video__controller--mr js-playback-toggler" aria-label="Jouer la musique" aria-pressed="false">
+              <img src="ressources/play.svg" alt="" class="video__controller-logo">
+            </button>
+            
+            <button class="video__controller video__controller--mr js-mute-btn" aria-label="Mettre en sourdine" aria-pressed="false">
+              <img src="ressources/unmute.svg" alt="" class="video__controller-logo">
+            </button>
+            
+            <input 
+              type="range" 
+              class="video__volume-range"
+              min="0"
+              max="100"
+              value="50"
+              step="1"
+              aria-label="Volume"
+            >
+            <div class="video__timer">
+              <span class="video__time js-current-video-time">00:00</span>
+              /
+              <span class="video__time js-total-video-time">00:00</span>
+            </div>
+            
+            <button class="video__controller video__controller--fullscreen-ml js-fullscreen-toggler" aria-label="Passer en plein écran" aria-pressed="false">
+              <img src="ressources/fullscreen.svg" alt="" class="video__controller-logo">
+            </button>
+            
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

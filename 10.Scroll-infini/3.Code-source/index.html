@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Infini</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="search-imgs">
+      <div class="search-imgs__container">
+        <header class="search-imgs__header">
+          <h1 class="search-imgs__title">
+            <span class="search-imgs__title--style">Clone</span> Unsplash
+          </h1>
+        </header>
+
+        <form class="search-imgs__form">
+          <label for="search" class="search-imgs__label">
+            Votre recherche
+          </label>
+          <input id="search" type="text" class="search-imgs__input" />
+        </form>
+
+        <ul class="search-imgs__list">
+          <!-- <li class="search-imgs__list-item">
+            <img src="images/image-test.jpg" alt="" class="search-imgs__list-item-img">
+          </li> -->
+        </ul>
+
+        <p class="search-imgs__error-msg"></p>
+        <div class="search-imgs__marker"></div>
+      </div>
+    </main>
+
+    <div class="loader">
+      <p class="loader__text">Loading ...</p>
+      <div class="loader__loading-animation"></div>
+    </div>
+
+    <button class="scroll-to-top-button">
+      <img
+        src="images/arrow.svg"
+        alt="Aller en haut de la page"
+        class="scroll-to-top-button__logo"
+      />
+    </button>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

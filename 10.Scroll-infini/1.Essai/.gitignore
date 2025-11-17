@@ -1,0 +1,62 @@
+# ===========================
+# FICHIERS DE CONFIGURATION SENSIBLES
+# ===========================
+
+# Fichier contenant la clé API Unsplash
+config.js
+
+# ===========================
+# FICHIERS TEMPORAIRES ET CACHE
+# ===========================
+
+# Cache des navigateurs
+.cache/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# ===========================
+# FICHIERS SYSTÈME
+# ===========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ===========================
+# ÉDITEURS ET IDE
+# ===========================
+
+# Visual Studio Code
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# ===========================
+# LOGS ET DEBUGGING
+# ===========================
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===========================
+# DÉPENDANCES (si vous ajoutez npm plus tard)
+# ===========================
+
+# Node modules (si vous utilisez npm/yarn plus tard)
+node_modules/
+package-lock.json
+yarn.lock

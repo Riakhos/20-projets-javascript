@@ -164,8 +164,8 @@ body {
   width: 70%;
   height: 250px;
   margin: 0 auto;
-  /* opacity: 0;
-  translate: 0 40px; */
+  opacity: 0;
+  translate: 0 40px;
   transition: 
   opacity 0.4s ease-out,
   translate 0.4s ease-out;

@@ -214,12 +214,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* ----------------------------------------------
     REVEAL AU SCROLL (IntersectionObserver)
-    - ajoute la classe .revealed sur les .reveal-item
+    - ajoute la classe .revealed sur les .showcase-models__car-example
     ---------------------------------------------- */
     (function scrollReveal() {
-        const items = document.querySelectorAll('.reveal-item');
+        const items = document.querySelectorAll('.showcase-models__car-example');
         if (!items || items.length === 0) return;
 
+        // Si le navigateur prend en charge l'API IntersectionObserver,
+        // on crée un observer pour surveiller l'apparition des éléments dans la fenêtre.
+        // - `entries` contient les informations de visibilité pour chaque élément observé.
+        // - `entry.isIntersecting` est true quand l'élément croise le seuil (ici threshold: 0.15).
+        // - Quand un élément devient visible, on lui ajoute la classe `revealed` (déclenche l'animation CSS)
+        //   puis on appelle `obs.unobserve(entry.target)` pour arrêter d'observer cet élément (optimisation).
+        // - Si l'API n'est pas disponible (anciens navigateurs), le bloc `else` est un repli simple
+        //   qui applique immédiatement la classe `revealed` à tous les éléments (aucune animation liée à l'intersection).
         if ('IntersectionObserver' in window) {
             const io = new IntersectionObserver((entries, obs) => {
                 entries.forEach(entry => {
@@ -232,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             items.forEach(el => io.observe(el));
         } else {
-            // repli : révéler tous les éléments
+            // repli : révéler tous les éléments immédiatement si l'API n'est pas supportée
             items.forEach(el => el.classList.add('revealed'));
         }
     })();

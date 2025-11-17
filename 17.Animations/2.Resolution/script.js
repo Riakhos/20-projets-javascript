@@ -76,3 +76,20 @@ typewriter({
     text: "PUISSANCE, LIBERTÉ.", 
     delay: 150
 });
+
+title.textContent = '';
+
+const slideInCars = document.querySelectorAll('.showcase-models__car-example');
+
+const intersectionObserver = new IntersectionObserver(handleIntersect, {rootMargin: '-10%'});
+
+slideInCars.forEach(el => intersectionObserver.observe(el));
+
+function handleIntersect(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('js-active-car-li');
+            intersectionObserver.unobserve(entry.target);
+        }
+    });
+}

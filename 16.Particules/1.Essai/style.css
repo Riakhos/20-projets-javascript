@@ -660,6 +660,8 @@ textarea:focus {
 @media (max-width: 900px) {
   .particles__stage {
     grid-template-columns: 1fr 300px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   #particles-canvas {
@@ -680,5 +682,20 @@ textarea:focus {
 
   #particles-canvas {
     height: 52vh;
+  }
+}
+
+@media (max-width: 360px) {
+  .particles__header {
+    max-width: 340px;
+  }
+  #particles-canvas {
+    max-width: 340px;
+  }
+  .particles__stage {
+    padding: 0;
+  }
+  .particles__controls button {
+    padding: 0.5rem 1rem;
   }
 }

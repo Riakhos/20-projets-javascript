@@ -493,6 +493,38 @@ body {
   align-items: center;
 }
 
+@media (width <= 1300px) {
+  .animation-page {
+    max-width: 800px;
+  }
+
+  /* Cas 1 : l'élément porte LES DEUX classes sur le même noeud (ex: <h1 class="showcase-header__title typewriter-target">) */
+  .showcase-header__title.typewriter-target {
+    font-size: 52px;
+  }
+
+  /* Cas 2 : .typewriter-target est un enfant de .showcase-header__title
+     (au cas où vous modifierez la structure HTML plus tard) */
+  .showcase-header__title .typewriter-target {
+    font-size: 52px;
+  }
+}
+
+@media (width <= 800px) {
+  .animation-page {
+    max-width: 400px;
+  }
+  .showcase-header {
+    height: 500px;
+  }
+  .showcase-header__title.typewriter-target {
+    font-size: 42px;
+  }
+  .showcase-header__nav-link {
+    font-size: 16px;
+  }
+}
+
 /* Custom cursor (outer + inner) */
 .custom-cursor {
   position: fixed;
@@ -537,11 +569,6 @@ body {
   position: relative;
   background-image: url(ressources/hero-background.jpg);
   background-position: center;
-}
-@media (width <= 700px) {
-  .showcase-header {
-    height: 500px;
-  }
 }
 .showcase-header__nav {
   display: flex;
@@ -616,17 +643,6 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
   animation: fade-in 0.3s 0.5s ease-out forwards, shimmer 3s ease-in-out infinite;
-}
-@media (width <= 700px) {
-  .showcase-header__title {
-    font-size: 42px;
-  }
-  .typewriter-target {
-    font-size: 42px;
-  }
-  .showcase-header__nav-link {
-    font-size: 16px;
-  }
 }
 
 /* Showcase container */

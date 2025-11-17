@@ -806,8 +806,43 @@ nav.main-nav ul li>a.active {
 @media (max-width: 480px) {
   .tictactoe__cell,
   .tictactoe__cell.tictactoe__cell-btn {
-    font-size: 48px !important;
-    min-height: 48px;
+    min-height: 24px;
+  }
+  .tictactoe__game-controls {
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+  }
+  .tictactoe__game-status {
+    font-size: 2rem;
+  }
+  .tictactoe__user-search-app {
+    display: block;
+    margin: 0;
+  }
+
+  .tictactoe {
+    padding: 0 1rem;
+  }
+
+  .tictactoe__header,
+  .tictactoe__info-game {
+    position: relative;
+    width: auto;
+    height: auto;
+    margin: 0 auto 1rem;
+    max-width: 260px;
+  }
+
+  .tictactoe__cells-container,
+  .board {
+    max-width: 260px;
+    gap: 6px;
+    margin:  0 0 1rem 0;
+  }
+
+  .tictactoe__main-title,
+  .tictactoe__info-game-title {
+    font-size: 24px;
   }
 }
 

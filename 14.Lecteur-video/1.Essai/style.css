@@ -803,22 +803,60 @@ body {
 }
 
 /* Mobile : empiler contrôles pour tenir l'espace */
-@media (max-width: 480px) {
+@media (max-width: 324px) {
   .vp-controls-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.25rem; /* espacement réduit */
+    padding: 0.25rem 0; /* petit padding pour respirer */
+  }
+
+  .vp-volume {
+    width: 44px; /* plus compact */
+  }
+
+  .vp-time {
+    font-size: 0.5rem; /* texte plus petit */
+  }
+
+  .vp-big-play {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.6rem;
   }
 
   .vp-right {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
+    gap: 0.25rem;
+  }
+
+  /* Ajustements progress bar / handle pour conserver l'ergonomie */
+  .vp-progress {
+    height: 8px;
+  }
+  .vp-progress__seek-handle {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* --- NOUVEAU : placer les contrôles sous la vidéo (ne plus être overlay) --- */
+  /* cibler .vp-controls pour remplacer position:absolute défini en desktop */
+  .video-wrap .vp-controls,
+  .video-player .vp-controls {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 0.6rem;
+    box-sizing: border-box;
+    padding: 0.45rem; /* légère respiration interne */
+    border-radius: 10px;
+  }
+
+  /* annuler l'effet hover qui faisait remonter les contrôles */
+  .video-player:hover .vp-controls {
+    transform: none;
   }
 }
 
 /* Petite animation pour indiquer état lecture (optionnel) */
-.video-element.playing+.vp-big-play {
+.video-element.playing + .vp-big-play {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.95);

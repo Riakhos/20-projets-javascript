@@ -278,7 +278,6 @@ body {
 
 .wiki-app__main-title--style {
   font-weight: 800;
-  color: #f7df1e;
   text-shadow: 0 0 10px rgba(247, 223, 30, 0.3);
 }
 
@@ -289,6 +288,7 @@ body {
   background: #222;
   border-radius: 16px;
   box-shadow: 0 0 12px 2px #f7df1e, 0 2px 8px rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }

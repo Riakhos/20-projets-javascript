@@ -73,7 +73,7 @@ nav.main-nav .nav-content {
 .menu-burger img[src$="burger.png"],
 .menu-burger img[src$="close.png"] {
   -webkit-filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6))
-                   invert(95%) sepia(92%) saturate(700%) hue-rotate(2deg) brightness(105%) contrast(95%);
+                  invert(95%) sepia(92%) saturate(700%) hue-rotate(2deg) brightness(105%) contrast(95%);
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6))
           invert(95%) sepia(92%) saturate(700%) hue-rotate(2deg) brightness(105%) contrast(95%);
 }
@@ -83,7 +83,7 @@ nav.main-nav .nav-content {
 .menu-burger img[src$="close.png"]:hover {
   transform: scale(1.08);
   -webkit-filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6))
-                   invert(97%) sepia(96%) saturate(850%) hue-rotate(2deg) brightness(110%) contrast(98%);
+                  invert(97%) sepia(96%) saturate(850%) hue-rotate(2deg) brightness(110%) contrast(98%);
   filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6))
           invert(97%) sepia(96%) saturate(850%) hue-rotate(2deg) brightness(110%) contrast(98%);
 }

@@ -15,6 +15,26 @@
   </head>
   <body>
 
+    <main class="typing-game-page">
+      <div class="typing-game">
+        <header class="typing-game__header">
+          <h1 class="typing-game__header-title">Turbo clavier</h1>
+          <p class="typing-game__help">
+            Appuyez sur 
+            <span class="typing-game__help-key">"ctrl"</span>+
+            <span class="typing-game__help-key">"alt"</span>+
+            <span class="typing-game__help-key">"enter"</span>
+            pour relancer une partie
+          </p>
+          <div class="typing-game__info">
+            <p class="typing-game__info-text typing-game__info-text--time js-time-left js-active-time">Temps : 60</p>
+            <p class="typing-game__info-text typing-game__info-text--score js-score">Score : 0</p>
+          </div>
+        </header>
+        <textarea class="typing-game__textarea"></textarea>
+        <p class="typing-game__sentence-to-write"></p>
+      </div>
+    </main>
 
     <script type="module" src="script.js"></script>
   </body>

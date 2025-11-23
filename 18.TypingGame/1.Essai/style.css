@@ -1,6 +1,6 @@
 /* ===========================
-   NAVIGATION PRINCIPALE
-   =========================== */
+  NAVIGATION PRINCIPALE
+=========================== */
 nav.main-nav {
   background: #222;
   padding: 1em 0;
@@ -83,7 +83,7 @@ nav.main-nav ul li {
   position: relative;
 }
 
-nav.main-nav ul li > a {
+nav.main-nav ul li>a {
   color: #f7df1e;
   text-decoration: none;
   font-weight: bold;
@@ -94,7 +94,8 @@ nav.main-nav ul li > a {
   white-space: nowrap;
 }
 
-nav.main-nav ul li > a:hover {
+nav.main-nav ul li>a:hover,
+nav.main-nav ul li>a.active {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -102,7 +103,7 @@ nav.main-nav ul li > a:hover {
 }
 
 /* États actifs pour les liens de navigation */
-nav.main-nav ul li > a.active {
+nav.main-nav ul li>a.active {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -146,17 +147,32 @@ nav.main-nav ul li > a.active {
   animation: slideInFromLeft 0.3s ease forwards;
 }
 
-.dropdown.active .dropdown-menu li:nth-child(1) { animation-delay: 0.1s; }
-.dropdown.active .dropdown-menu li:nth-child(2) { animation-delay: 0.15s; }
-.dropdown.active .dropdown-menu li:nth-child(3) { animation-delay: 0.2s; }
-.dropdown.active .dropdown-menu li:nth-child(4) { animation-delay: 0.25s; }
-.dropdown.active .dropdown-menu li:nth-child(5) { animation-delay: 0.3s; }
+.dropdown.active .dropdown-menu li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(5) {
+  animation-delay: 0.3s;
+}
 
 @keyframes slideInFromLeft {
   from {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -190,7 +206,7 @@ nav.main-nav ul li > a.active {
 .dropdown-menu li a {
   display: block;
   padding: 0.8em 1.2em;
-  color: #fff;
+  color: #f7df1e;
   text-decoration: none;
   font-size: 0.9em;
   border-radius: 0;
@@ -222,8 +238,8 @@ nav.main-nav ul li > a.active {
 }
 
 /* ===========================
-   BASE ET LAYOUT
-   =========================== */
+  BASE ET LAYOUT
+=========================== */
 *,
 ::before,
 ::after {
@@ -234,8 +250,8 @@ nav.main-nav ul li > a.active {
 
 body {
   font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  /* background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e); */
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
   /* background-size: 200% 100%;
   animation: shimmer 5s ease-in-out infinite;
   -webkit-background-clip: text;
@@ -250,20 +266,31 @@ body {
   padding-top: 80px;
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
 /* ===========================
-   RESPONSIVE NAVIGATION
-   =========================== */
-@media (width <= 820px) {
+  RESPONSIVE NAVIGATION
+=========================== */
+@media (width <=820px) {
+
   /* Navigation responsive */
   nav.main-nav .nav-content {
     flex-direction: row;
     padding: 0 0.5em;
   }
-  
+
   .menu-burger {
     display: block !important;
   }
-  
+
   nav.main-nav ul {
     display: none;
     flex-direction: column;
@@ -278,23 +305,23 @@ body {
     margin: 0;
     padding: 0.5em 0;
   }
-  
+
   nav.main-nav ul.open {
     display: flex;
   }
-  
+
   nav.main-nav ul li {
     width: 100%;
     text-align: center;
     border-bottom: 1px solid #444;
   }
-  
+
   nav.main-nav ul li:last-child {
     border-bottom: none;
   }
-  
-  nav.main-nav ul li > a {
-    color: #fff !important;
+
+  nav.main-nav ul li>a {
+    color: #f7df1e !important;
     background: none !important;
     padding: 1em 0;
     display: block;
@@ -303,23 +330,24 @@ body {
     transform: none !important;
     box-shadow: none !important;
   }
-  
-  nav.main-nav ul li > a:hover,
-  nav.main-nav ul li > a.active {
+
+  nav.main-nav ul li>a:hover,
+  nav.main-nav ul li>a.active {
     background: #f7df1e !important;
     color: #222 !important;
   }
-  
+
   /* Ajuster l'espacement pour le menu mobile */
   nav.main-nav ul {
     gap: 0;
-  }  
+  }
 }
 
 /* ===========================
-   RESPONSIVE DROPDOWNS MOBILE - FIX
-   =========================== */
+  RESPONSIVE DROPDOWNS MOBILE - FIX
+=========================== */
 @media (max-width: 820px) {
+
   /* Force l'affichage des dropdowns en mode modal pour mobile */
   .dropdown-menu {
     position: fixed !important;
@@ -393,7 +421,7 @@ body {
     border: none !important;
     border-radius: 0 !important;
     background: transparent !important;
-    color: #fff !important;
+    color: #f7df1e !important;
     text-decoration: none !important;
     transition: all 0.25s ease !important;
     width: 100% !important;
@@ -426,5 +454,398 @@ body {
   /* Désactiver les animations en cascade pour mobile */
   .dropdown.active .dropdown-menu li {
     animation: none !important;
+  }
+}
+
+/* ===========================
+  RESPONSIVE DROPDOWNS MOBILE - FIX
+=========================== */
+.typing-game-page {
+  max-width: 1200px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border: 3px solid #28a745;
+  border-radius: 20px;
+  background: #333;
+}
+
+/* Header */
+.typing-game__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.typing-game__title {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+  margin-bottom: 0.5rem;
+}
+
+.typing-game__subtitle {
+  font-size: 1.2rem;
+  font-weight: 200;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Zone de jeu */
+.typing-game__game-area {
+  background: rgba(255, 255, 255, 0.02);
+  border: 2px solid #28a745;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.typing-game__phrase-container {
+  background: rgba(40, 167, 69, 0.1);
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 1.5rem;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typing-game__phrase {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.8;
+  text-align: center;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.typing-game__input-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.typing-game__input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border: 2px solid #f7df1e;
+  border-radius: 15px;
+  /* Effet shimmer sur le fond — texte transparent (clipping) */
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
+  font-family: 'Roboto', monospace;
+  transition: all 0.3s ease;
+}
+
+.typing-game__input:focus {
+  border: 2px solid #28a745;
+  outline: 3px solid rgba(247, 223, 30, 0.22);
+  outline-offset: 3px;
+  /* Annuler le clipping pour rendre le texte visible */
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: initial;
+  /* Fond stable et lisible au focus */
+  background: rgba(247, 223, 30, 0.12);
+  background-size: auto;
+  /* annule le sizing du gradient */
+  animation: none;
+  /* désactive le shimmer au focus pour lisibilité */
+  /* Couleur du texte visible */
+  color: #f7df1e;
+  box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
+  transform: translateY(-2px);
+}
+
+.typing-game__input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Stats */
+.typing-game__stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.typing-game__stat {
+  background: rgba(40, 167, 69, 0.1);
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  min-width: 140px;
+}
+
+.typing-game__stat:first-child {
+  /* Positionner pour les pseudo‑éléments */
+  position: relative;
+  z-index: 1;
+}
+
+/* Pseudo‑éléments pour les dégradés animés */
+.typing-game__stat:first-child::before,
+.typing-game__stat:first-child::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  opacity: 0;
+  /* masqué par défaut tant que .js-active-time n'est pas activé */
+}
+
+/* Activation des animations quand la classe .js-active-time est ajoutée */
+.typing-game__stat:first-child.js-active-time::before {
+  /* Dégradé vert (rgba(40,167,69) → rgb(19,188,70)) */
+  background-image: linear-gradient(45deg, rgba(40, 167, 69, 0.4), rgba(19, 188, 70, 0.4));
+  animation: fading 1s 1s ease-in-out alternate infinite;
+  opacity: 1;
+}
+.typing-game__stat:first-child.js-active-time::after {
+  /* Dégradé rouge → dégradé rouge/orange */
+  background-image: linear-gradient(45deg, rgba(255, 0, 0, 0.4), rgba(252, 139, 26, 0.4));
+  animation: fading 1s ease-in-out alternate infinite;
+  opacity: 1;
+}
+
+
+@keyframes fading {
+  to {
+    opacity: 0;
+  }
+}
+
+.typing-game__stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 0.3rem;
+}
+
+.typing-game__stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Boutons */
+.typing-game__controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.typing-game__btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.typing-game__btn--primary {
+  background: linear-gradient(135deg, #f7df1e, #ffa500);
+  color: #333;
+}
+
+.typing-game__btn--primary:hover:not(:disabled) {
+  background: rgba(247, 223, 30, 0.12);
+  color: #f7df1e;
+  border: 3px solid #28a745;
+  transform: translateY(-2px);
+}
+
+.typing-game__btn--secondary {
+  background: #666;
+  color: #f7df1e;
+}
+
+.typing-game__btn--secondary:hover:not(:disabled) {
+  background: #888;
+  transform: translateY(-2px);
+}
+
+.typing-game__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.typing-game__btn:focus {
+  outline: 3px solid rgba(247, 223, 30, 0.22);
+  outline-offset: 3px;
+}
+
+/* Écran de résultats */
+.typing-game__results {
+  background: rgba(40, 167, 69, 0.08);
+  border: 2px solid #28a745;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.typing-game__results-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+  margin-bottom: 1.5rem;
+}
+
+.typing-game__results-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.typing-game__result-item {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.typing-game__result-label {
+  display: block;
+  font-size: 0.95rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+.typing-game__result-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.typing-game__results-actions {
+  margin-top: 1rem;
+}
+
+/* Footer */
+.typing-game__footer {
+  text-align: center;
+  padding: 1rem;
+  color: #999;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+/* Responsive */
+@media (width <=768px) {
+  .typing-game-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .typing-game__title {
+    font-size: 2rem;
+  }
+
+  .typing-game__subtitle {
+    font-size: 1rem;
+  }
+
+  .typing-game__phrase {
+    font-size: 1.2rem;
+  }
+
+  .typing-game__input {
+    font-size: 1rem;
+  }
+
+  .typing-game__stat {
+    min-width: 100px;
+    padding: 0.8rem 1rem;
+  }
+
+  .typing-game__stat-value {
+    font-size: 1.5rem;
+  }
+
+  .typing-game__results-title {
+    font-size: 2rem;
+  }
+
+  .typing-game__result-value {
+    font-size: 1.6rem;
+  }
+}
+
+@media (width <=480px) {
+  .typing-game__stats {
+    flex-direction: column;
+  }
+
+  .typing-game__stat {
+    width: 100%;
+  }
+
+  .typing-game__controls {
+    flex-direction: column;
+  }
+
+  .typing-game__btn {
+    width: 100%;
   }
 }

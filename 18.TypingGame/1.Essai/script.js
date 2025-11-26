@@ -339,18 +339,21 @@ document.addEventListener("DOMContentLoaded", function () {
     function initGame() {
         gameState.status = "idle";
 
-        // Réactiver le sélecteur de nombre de phrases
+        // Réactiver le sélecteur de nombre de phrases et lire sa valeur AVANT de générer les phrases
         if (phraseCountInput) {
             phraseCountInput.disabled = false;
             // Relire la valeur courante pour que le jeu utilise bien le nombre sélectionné
-            const v = Number(phraseCountInput.value) || gameState.totalPhrasesPerGame;
-            gameState.totalPhrasesPerGame = Math.max(1, Math.min(20, v));
+            const v = Number(phraseCountInput.value);
+            if (!isNaN(v) && v > 0) {
+                gameState.totalPhrasesPerGame = Math.max(1, Math.min(20, v));
+            }
         }
 
-        // Préparer une file de phrases pour le round (ex: 5)
+        // Préparer une file de phrases pour le round en utilisant la valeur mise à jour
         gameState.phrasesQueue = getRandomPhrases(gameState.totalPhrasesPerGame);
         gameState.currentPhraseIndex = 0;
-        gameState.currentPhrase = gameState.phrasesQueue[gameState.currentPhraseIndex] || "";
+        gameState.currentPhrase =
+            gameState.phrasesQueue[gameState.currentPhraseIndex] || "";
         gameState.currentIndex = 0;
         gameState.startTime = null;
         gameState.elapsedSeconds = 0;
@@ -394,6 +397,11 @@ document.addEventListener("DOMContentLoaded", function () {
      * Démarre une nouvelle session de jeu.
      */
     function startGame() {
+        // Toujours réinitialiser le jeu avant de démarrer pour prendre en compte
+        // les changements du sélecteur de nombre de phrases
+        initGame();
+        
+        // Maintenant démarrer la partie
         gameState.status = "playing";
 
         if (typingTextarea) {

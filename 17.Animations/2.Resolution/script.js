@@ -15,6 +15,7 @@ window.addEventListener('mousemove', handleWindowMousemove);
 
 function handleWindowMousemove(e) {
 	mouseX = e.clientX;
+	
 	mouseY = e.clientY;
 
 	if(!isRafIdle) {
@@ -33,63 +34,13 @@ function animateCursor() {
 	innerCurrentX += (mouseX - innerCurrentX) * innerDotCursorSpeed;
 	innerCurrentY += (mouseY - innerCurrentY) * innerDotCursorSpeed;
 
-	cursorOuterCircle.style.translate = `calc(${outerCurrentX}px - 50%) calc(${outerCurrentY}px - 50%)`;
-	cursorInnerDot.style.translate = `calc(${innerCurrentX}px - 50%) calc(${innerCurrentY}px - 50%)`;
+	cursorOuterCircle.style.translate = `calc(${outerCurrentX}px - 50%) calc(${outerCurrentY}px -50%)`;
+	cursorInnerDot.style.translate = `calc(${innerCurrentX}px - 50%) calc(${innerCurrentY}px -50%)`;
 
 	if (Math.abs(outerCurrentX - mouseX) < 0.1 && Math.abs( outerCurrentY - mouseY) < 0.1) {
 		cancelAnimationFrame(isRafIdle);
 		isRafIdle = null;
 		return
 	}
-
 	isRafIdle = requestAnimationFrame(animateCursor);
-
-	const hoveredElement = document.elementFromPoint(mouseX, mouseY);
-
-	if (hoveredElement && hoveredElement.closest('a,button,input,textarea')) {
-		cursorOuterCircle.style.opacity = '0';
-		cursorInnerDot.style.opacity = '0';
-	} else {
-		cursorOuterCircle.style.opacity = '1';
-		cursorInnerDot.style.opacity = '1';
-	}
-}
-
-const title = document.querySelector('.showcase-header__title');
-const subtitle = document.querySelector('.showcase-header__subtitle');
-
-function typewriter({ element, text, delay = 100 }) {
-    let index = 0;
-
-    const intervalId = setInterval(() => {
-        if (index < text.length) {
-            element.textContent += text[index];
-            index++;
-        } else {
-            clearInterval(intervalId);
-        }
-    }, delay);
-}
-
-typewriter({
-    element: title, 
-    text: "PUISSANCE, LIBERTÉ.", 
-    delay: 150
-});
-
-title.textContent = '';
-
-const slideInCars = document.querySelectorAll('.showcase-models__car-example');
-
-const intersectionObserver = new IntersectionObserver(handleIntersect, {rootMargin: '-10%'});
-
-slideInCars.forEach(el => intersectionObserver.observe(el));
-
-function handleIntersect(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('js-active-car-li');
-            intersectionObserver.unobserve(entry.target);
-        }
-    });
 }

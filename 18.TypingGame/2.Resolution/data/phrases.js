@@ -1,4 +1,4 @@
- const phrases = [
+const phrases = [
   { "id": 1, "text": "Le chat dort sur le canapé en plein soleil." },
   { "id": 2, "text": "Les montagnes sont belles au lever du soleil." },
   { "id": 3, "text": "Il faut toujours croire en ses rêves." },

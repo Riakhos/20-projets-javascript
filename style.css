@@ -249,34 +249,6 @@ h2 {
 }
 
 /* ===========================
-    ABOUT SECTION
-    =========================== */
-.about-section {
-    margin-top: 3em;
-}
-
-.about-title {
-    color: #f7df1e;
-    margin-bottom: 1em;
-}
-
-.about-features {
-    display: flex;
-    justify-content: center;
-    gap: 2em;
-    margin-top: 2em;
-    flex-wrap: wrap;
-}
-
-.about-feature {
-    text-align: center;
-}
-
-.about-feature h3 {
-    color: #f7df1e;
-}
-
-/* ===========================
     RESPONSIVE
     =========================== */
 @media (max-width: 768px) {
@@ -295,9 +267,5 @@ h2 {
     
     .container {
     padding: 1em;
-    }
-    
-    .about-features {
-        gap: 1.5em;
     }
 }

@@ -169,6 +169,43 @@
       <header class="typing-game__header">
         <h1 class="typing-game__title">Turbo Clavier</h1>
         <p class="typing-game__subtitle">Entraînez votre vitesse de frappe !</p>
+
+        <!-- Sélecteur du nombre de phrases -->
+        <div class="typing-game__settings">
+          <label for="phrase-count" class="typing-game__settings-label">
+            Nombre de phrases :
+          </label>
+          <input
+            type="number"
+            id="phrase-count"
+            class="typing-game__settings-input"
+            min="1"
+            max="20"
+            value="5"
+            aria-label="Nombre de phrases par partie"
+          />
+        </div>
+
+        <!-- Indicateur de progression (X / Y) + barre -->
+        <div class="typing-game__progress-wrapper">
+          <div
+            class="typing-game__progress-label"
+            id="progress-label"
+            aria-live="polite"
+          >
+            Phrase 1 / 5
+          </div>
+          <div class="typing-game__progress-bar-container">
+            <div
+              class="typing-game__progress-bar"
+              id="progress-bar"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="5"
+              aria-valuenow="1"
+            ></div>
+          </div>
+        </div>
       </header>
 
       <!-- Zone de jeu principale -->
@@ -180,18 +217,17 @@
           </p>
         </div>
 
-        <!-- Champ de saisie (input invisible ou textarea pour capturer les touches) -->
-        <div class="typing-game__input-wrapper">
-          <input
-            type="text"
-            id="typing-input"
-            class="typing-game__input"
+        <!-- Champ de saisie (textarea pour capturer les touches) -->
+        <div class="typing-game__textarea-wrapper">
+          <textarea
+            id="typing-textarea"
+            class="typing-game__textarea"
             placeholder="Commencez à taper ici..."
             aria-label="Zone de saisie pour le jeu"
             autocomplete="off"
             spellcheck="false"
-            
-          />
+            rows="3"
+          ></textarea>
         </div>
 
         <!-- Informations de statut (temps, WPM, précision) -->

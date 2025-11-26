@@ -1,100 +1,101 @@
-const imagesList = document.querySelector(".search-imgs__list");
-const errorMsg = document.querySelector(".search-imgs__error-msg");
-const loader = document.querySelector(".loader");
+const imagesList = document.querySelector(".search-imgs__list")
+const errorMsg = document.querySelector(".search-imgs__error-msg")
+const loader = document.querySelector(".loader")
 
-let searchQuery = "random";
-let pageIndex = 1;
+let searchQuery = "random"
+let pageIndex = 1
 let totalPages;
 
 async function fetchData() {
   let data;
-  loader.classList.add("js-active-loader");
-  errorMsg.textContent = "";
+  loader.classList.add("js-active-loader")
+  errorMsg.textContent = ""
 
   try {
-    const response = await fetch(
-      `${API_CONFIG.API_URL}?page=${pageIndex}&per_page=${API_CONFIG.PER_PAGE}&query=${searchQuery}&client_id=${API_CONFIG.API_KEY}`
-    );
+    const response = await fetch(`https://api.unsplash.com/search/photos?page=${pageIndex}&per_page=30&query=${searchQuery}&client_id=098ZhvnTELBKDlUaPAf0abcAJWdw_LPCBBdPgi7vUcQ`)
 
-    if (!response.ok) throw new Error();
+    if (!response.ok) throw new Error()
 
-    data = await response.json();
-    totalPages = data.total_pages;
-    console.log(data);
-  } catch (error) {
-    errorMsg.textContent = "Erreur lors de l'appel de données";
-    return;
-  } finally {
-    loader.classList.remove("js-active-loader");
+    data = await response.json()
+    totalPages = data.total_pages
+    console.log(data)
+  }
+  catch (error) {
+    errorMsg.textContent = "Erreur lors de l'appel de données"
+    return
+  }
+  finally {
+    loader.classList.remove("js-active-loader")
   }
 
-  if (!data.total) {
-    imagesList.textContent = "";
-    errorMsg.textContent =
-      "Wopsy, rien de tel dans notre base de données ... tentez un mot clé plus précis !";
-    return;
-  } else {
-    createImages(data.results);
+  if(!data.total){
+    imagesList.textContent = ""
+    errorMsg.textContent = "Wopsy, rien de tel dans notre base de données ... tentez un mot clé plus précis !"
+    return
   }
+  else {
+    createImages(data.results)
+  }
+
 }
-fetchData();
+fetchData()
 
-function createImages(data) {
-  const fragment = document.createDocumentFragment();
 
-  data.forEach((img) => {
-    const li = document.createElement("li");
-    li.className = "search-imgs__list-item";
-    const newImg = document.createElement("img");
-    newImg.className = "search-imgs__list-item-img";
-    newImg.src = img.urls.regular;
-    li.appendChild(newImg);
-    fragment.appendChild(li);
-  });
-  imagesList.appendChild(fragment);
+function createImages(data){
+  const fragment = document.createDocumentFragment()
+
+  data.forEach(img => {
+    const li = document.createElement("li")
+    li.className = "search-imgs__list-item"
+    const newImg = document.createElement("img")
+    newImg.className = "search-imgs__list-item-img"
+    newImg.src = img.urls.regular
+    li.appendChild(newImg)
+    fragment.appendChild(li)
+  })
+  imagesList.appendChild(fragment)
 }
 
-const observer = new IntersectionObserver(handleIntersect, {
-  rootMargin: "50%",
-});
+const observer = new IntersectionObserver(handleIntersect, {rootMargin: "50%"})
 
-observer.observe(document.querySelector(".search-imgs__marker"));
+observer.observe(document.querySelector(".search-imgs__marker"))
 
 function handleIntersect(entries) {
-  if (window.scrollY > window.innerHeight && entries[0].isIntersecting) {
-    if (pageIndex + 1 <= totalPages) {
-      pageIndex++;
-      fetchData();
+  if(window.scrollY > window.innerHeight && entries[0].isIntersecting) {
+    if(pageIndex + 1 <= totalPages) {
+      pageIndex++
+      fetchData()
     }
   }
 }
 
-const input = document.querySelector(".search-imgs__input");
-const form = document.querySelector(".search-imgs__form");
 
-form.addEventListener("submit", handleImagesSearch);
+const input = document.querySelector(".search-imgs__input")
+const form = document.querySelector(".search-imgs__form")
 
-function handleImagesSearch(e) {
-  e.preventDefault();
+form.addEventListener("submit", handleImagesSearch)
 
-  imagesList.textContent = "";
-  errorMsg.textContent = "";
+function handleImagesSearch(e){
+  e.preventDefault()
 
-  if (!input.value.trim()) return;
+  imagesList.textContent = ""
+  errorMsg.textContent = ""
 
-  searchQuery = input.value;
-  pageIndex = 1;
-  totalPages = undefined;
-  fetchData();
+  if(!input.value.trim()) return 
+
+  searchQuery = input.value 
+  pageIndex = 1
+  totalPages = undefined 
+  fetchData()
 }
 
-const scrollToTop = document.querySelector(".scroll-to-top-button");
+const scrollToTop = document.querySelector(".scroll-to-top-button")
 
-scrollToTop.addEventListener("click", pushToTop);
+scrollToTop.addEventListener("click", pushToTop)
 
-function pushToTop() {
+function pushToTop(){
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
-  });
+    behavior: "smooth"
+  })
 }

@@ -505,6 +505,87 @@ body {
   animation: shimmer 3s ease-in-out infinite;
 }
 
+/* Sélecteur du nombre de phrases */
+.typing-game__settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.typing-game__settings-label {
+  font-size: 1rem;
+  font-weight: 500;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.typing-game__settings-input {
+  font-size: 1rem;
+  border: 1px solid #28a745 !important;
+  background: rgba(40, 167, 69, 0.1) !important;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.typing-game__settings-input:focus {
+  outline: 3px solid rgba(247, 223, 30, 0.22);
+  outline-offset: 2px;
+  background: rgba(247, 223, 30, 0.08);
+}
+
+.typing-game__settings-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Indicateur de progression */
+.typing-game__progress-wrapper {
+  margin-top: 1.5rem;
+}
+
+.typing-game__progress-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Barre de progression */
+.typing-game__progress-bar-container {
+  width: 100%;
+  max-width: 400px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.typing-game__progress-bar {
+  height: 100%;
+  width: 20%;
+  /* valeur initiale (1/5) */
+  background: linear-gradient(90deg, #f7df1e, #ffa500);
+  border-radius: 10px;
+  transition: width 0.4s ease-out;
+  box-shadow: 0 2px 8px rgba(247, 223, 30, 0.4);
+}
+
 /* Zone de jeu */
 .typing-game__game-area {
   background: rgba(255, 255, 255, 0.02);
@@ -542,50 +623,167 @@ body {
   animation: shimmer 3s ease-in-out infinite;
 }
 
-.typing-game__input-wrapper {
+/* Styles pour les lettres dynamiques dans la phrase */
+.typing-game__phrase span {
+  display: inline-block;
+  transition: all 0.15s ease;
+  /* Préserve les espaces et évite leur collapse */
+  white-space: pre;
+}
+
+.typing-game__phrase span.typed {
+  /* Lettre déjà tapée : vert */
+  color: #28a745;
+  -webkit-text-fill-color: #28a745;
+  opacity: 0.9;
+  background: rgba(40, 167, 69, 0.12);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.typing-game__phrase span.incorrect {
+  /* Lettre tapée incorrectement : rouge */
+  color: #dc3545;
+  -webkit-text-fill-color: #dc3545;
+  opacity: 0.95;
+  background: rgba(220, 53, 69, 0.12);
+  border-radius: 4px;
+  padding: 0 4px;
+  /* conserver un indicateur textuel léger en plus (optionnel) */
+  text-decoration: underline wavy rgba(220, 53, 69, 0.25);
+}
+
+.typing-game__phrase span.current {
+  /* Lettre courante (curseur) : surbrillance jaune */
+  color: #f7df1e;
+  -webkit-text-fill-color: #f7df1e;
+  background: rgba(247, 223, 30, 0.2);
+  border-radius: 4px;
+  padding: 0 2px;
+  transform: scale(1.1);
+  font-weight: 700;
+}
+
+.typing-game__phrase span.pending {
+  /* Lettre à venir : blanc/gris */
+  color: #999;
+  -webkit-text-fill-color: #999;
+}
+
+.typing-game__textarea-wrapper {
   margin-bottom: 1.5rem;
 }
 
-.typing-game__input {
+.typing-game__textarea {
   width: 100%;
   padding: 1rem;
   font-size: 1.2rem;
   border: 2px solid #f7df1e;
   border-radius: 15px;
-  /* Effet shimmer sur le fond — texte transparent (clipping) */
+  /* Par défaut : fond simple, texte visible */
+  background: rgba(255, 255, 255, 0.05);
+  color: #f7df1e;
+  box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
+  font-family: 'Roboto', monospace;
+  transition: all 0.3s ease;
+  min-height: 3.2rem;
+  /* pour textarea */
+  resize: vertical;
+}
+
+/* Progression */
+.typing-game__progress-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.typing-game__progress {
+  flex: 1 1 60%;
+  text-align: left;
+}
+
+.progress-label {
+  font-size: 0.95rem;
+  font-weight: 400;
   background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
   background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
-  font-family: 'Roboto', monospace;
-  transition: all 0.3s ease;
+  animation: shimmer 3s ease-in-out infinite;
+  margin-bottom: 0.5rem;
 }
 
-.typing-game__input:focus {
-  border: 2px solid #28a745;
-  outline: 3px solid rgba(247, 223, 30, 0.22);
-  outline-offset: 3px;
-  /* Annuler le clipping pour rendre le texte visible */
+.progress {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.progress__bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #28a745, #f7df1e);
+  transition: width 300ms ease;
+}
+
+.typing-game__settings {
+  flex: 0 0 180px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.settings-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+#phrase-count {
+  width: 72px;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #222;
+  color: #f7df1e;
+}
+
+/* État actif : pendant le jeu, texte visible et couleur stable */
+.typing-game__textarea--active {
+  /* Annuler tout effet de clipping / transparent */
+  background: rgba(247, 223, 30, 0.08);
+  color: #f7df1e;
   -webkit-background-clip: border-box;
   background-clip: border-box;
   -webkit-text-fill-color: initial;
-  /* Fond stable et lisible au focus */
+  border: 2px solid #28a745;
+}
+
+.typing-game__textarea:focus {
+  border: 2px solid #28a745;
+  outline: 3px solid rgba(247, 223, 30, 0.22);
+  outline-offset: 3px;
   background: rgba(247, 223, 30, 0.12);
-  background-size: auto;
-  /* annule le sizing du gradient */
-  animation: none;
-  /* désactive le shimmer au focus pour lisibilité */
-  /* Couleur du texte visible */
   color: #f7df1e;
   box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
   transform: translateY(-2px);
 }
 
-.typing-game__input:disabled {
+.typing-game__textarea:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -637,6 +835,7 @@ body {
   animation: fading 1s 1s ease-in-out alternate infinite;
   opacity: 1;
 }
+
 .typing-game__stat:first-child.js-active-time::after {
   /* Dégradé rouge → dégradé rouge/orange */
   background-image: linear-gradient(45deg, rgba(255, 0, 0, 0.4), rgba(252, 139, 26, 0.4));
@@ -810,7 +1009,7 @@ body {
     font-size: 1.2rem;
   }
 
-  .typing-game__input {
+  .typing-game__textarea {
     font-size: 1rem;
   }
 

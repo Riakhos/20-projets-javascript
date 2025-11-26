@@ -83,7 +83,7 @@ nav.main-nav ul li {
   position: relative;
 }
 
-nav.main-nav ul li>a {
+nav.main-nav ul li > a {
   color: #f7df1e;
   text-decoration: none;
   font-weight: bold;
@@ -94,7 +94,7 @@ nav.main-nav ul li>a {
   white-space: nowrap;
 }
 
-nav.main-nav ul li>a:hover {
+nav.main-nav ul li > a:hover {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -102,7 +102,7 @@ nav.main-nav ul li>a:hover {
 }
 
 /* États actifs pour les liens de navigation */
-nav.main-nav ul li>a.active {
+nav.main-nav ul li > a.active {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -321,27 +321,6 @@ body {
   box-shadow: 0 0 12px rgba(247, 223, 30, 0.3);
 }
 
-/* Bordure dynamique selon la couleur sélectionnée */
-.gradient-app__input-group.dark-color {
-  outline-color: #f7df1e;
-  box-shadow: 0 0 12px rgba(247, 223, 30, 0.3);
-}
-
-.gradient-app__input-group.light-color {
-  outline-color: #222;
-  box-shadow: 0 0 12px rgba(34, 34, 34, 0.3);
-}
-
-.gradient-app__input-group.dark-color:hover {
-  outline-color: #f7df1e;
-  box-shadow: 0 0 20px rgba(247, 223, 30, 0.4);
-}
-
-.gradient-app__input-group.light-color:hover {
-  outline-color: #222;
-  box-shadow: 0 0 20px rgba(34, 34, 34, 0.4);
-}
-
 .gradient-app__color-label {
   display: block;
   font-size: 22px;
@@ -455,11 +434,11 @@ body {
     opacity: 1;
     visibility: visible;
   }
-  
+
   80% {
     opacity: 1;
   }
-  
+
   100% {
     opacity: 0;
     transform: translate(-50%, 30px);
@@ -467,88 +446,9 @@ body {
 }
 
 /* ===========================
-AFFICHAGE DU CODE CSS
-=========================== */
-.gradient-app__css-display {
-  display: none;
-  margin-top: 30px;
-  padding: 25px;
-  background: rgba(51, 51, 51, 0.9);
-  border: 2px solid #f7df1e;
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  max-width: 90vw;
-  width: fit-content;
-  min-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.gradient-app__css-display.show {
-  display: block !important;
-  animation: slideInCSS 0.4s ease forwards;
-}
-
-@keyframes slideInCSS {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.gradient-app__css-title {
-  color: #f7df1e;
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  text-shadow: 0 0 8px rgba(247, 223, 30, 0.3);
-}
-
-.gradient-app__css-code {
-  background: #222;
-  border: 1px solid #444;
-  border-radius: 8px;
-  padding: 15px 25px;
-  position: relative;
-  overflow-x: auto;
-  min-width: 550px;
-  white-space: nowrap;
-}
-
-.gradient-app__css-code code {
-  color: #f5f7fa;
-  font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
-  font-size: 16px;
-  line-height: 1.4;
-  white-space: nowrap;
-}
-
-.gradient-app__css-code::before {
-  content: "CSS";
-  position: absolute;
-  top: 1px;
-  right: 10px;
-  background: #f7df1e;
-  color: #222;
-  padding: 0 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-/* ===========================
   RESPONSIVE NAVIGATION
   =========================== */
 @media (width <=820px) {
-
   /* Navigation responsive */
   nav.main-nav .nav-content {
     flex-direction: row;
@@ -588,7 +488,7 @@ AFFICHAGE DU CODE CSS
     border-bottom: none;
   }
 
-  nav.main-nav ul li>a {
+  nav.main-nav ul li > a {
     color: #fff !important;
     background: none !important;
     padding: 1em 0;
@@ -599,8 +499,8 @@ AFFICHAGE DU CODE CSS
     box-shadow: none !important;
   }
 
-  nav.main-nav ul li>a:hover,
-  nav.main-nav ul li>a.active {
+  nav.main-nav ul li > a:hover,
+  nav.main-nav ul li > a.active {
     background: #f7df1e !important;
     color: #222 !important;
   }
@@ -615,7 +515,6 @@ AFFICHAGE DU CODE CSS
   RESPONSIVE DROPDOWNS MOBILE - FIX
   =========================== */
 @media (max-width: 820px) {
-
   /* Force l'affichage des dropdowns en mode modal pour mobile */
   .dropdown-menu {
     position: fixed !important;
@@ -722,23 +621,5 @@ AFFICHAGE DU CODE CSS
   /* Désactiver les animations en cascade pour mobile */
   .dropdown.active .dropdown-menu li {
     animation: none !important;
-  }
-
-  /* Responsive pour l'affichage du code CSS */
-  .gradient-app__css-display {
-    max-width: 95vw !important;
-    min-width: auto !important;
-    width: 95% !important;
-    padding: 15px !important;
-  }
-
-  .gradient-app__css-code {
-    min-width: auto !important;
-    padding: 12px 15px !important;
-    font-size: 14px !important;
-  }
-
-  .gradient-app__css-code code {
-    font-size: 14px !important;
   }
 }

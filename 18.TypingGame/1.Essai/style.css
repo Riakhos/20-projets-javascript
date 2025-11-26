@@ -568,7 +568,7 @@ body {
   width: 100%;
   max-width: 400px;
   height: 12px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(40, 167, 69, 0.1) ;
   border: 1px solid #28a745;
   border-radius: 10px;
   overflow: hidden;
@@ -678,10 +678,10 @@ body {
   width: 100%;
   padding: 1rem;
   font-size: 1.2rem;
-  border: 2px solid #f7df1e;
+  border: 2px solid #28a745;
   border-radius: 15px;
   /* Par défaut : fond simple, texte visible */
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(40, 167, 69, 0.1) ;
   color: #f7df1e;
   box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
   font-family: 'Roboto', monospace;

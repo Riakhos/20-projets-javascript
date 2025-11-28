@@ -2,553 +2,443 @@
 // GESTION NAVIGATION
 // ===========================
 
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
     // ===========================
     // GESTION DU MENU BURGER
     // ===========================
-    const burger = document.getElementById('burger-menu');
-    const navUl = document.querySelector('#nav-menu');
+    const burger = document.getElementById("burger-menu");
+    const navUl = document.querySelector("#nav-menu");
 
     if (burger && navUl) {
         // Au clic sur le burger, ouvrir/fermer le menu
-        burger.addEventListener('click', () => {
-            navUl.classList.toggle('open');
-            burger.src = navUl.classList.contains('open')
-                ? './assets/close.png'
-                : './assets/burger.png';
+        burger.addEventListener("click", () => {
+            navUl.classList.toggle("open");
+            burger.src = navUl.classList.contains("open")
+                ? "./assets/close.png"
+                : "./assets/burger.png";
         });
 
         // Ferme le menu si on repasse en mode desktop lors d'un redimensionnement
-        window.addEventListener('resize', () => {
+        window.addEventListener("resize", () => {
             if (window.innerWidth > 820) {
-                navUl.classList.remove('open');
-                burger.src = './assets/burger.png';
+                navUl.classList.remove("open");
+                burger.src = "./assets/burger.png";
             }
-        }); 
+        });
 
         // Fermer le menu quand on clique sur un lien en mode mobile
         // Sélectionner tous les liens sauf les dropdown-toggle
-        const navLinks = navUl.querySelectorAll('a:not(.dropdown-toggle)');
+        const navLinks = navUl.querySelectorAll("a:not(.dropdown-toggle)");
         // Ajouter aussi tous les liens dans les dropdown-menu
-        const dropdownLinks = navUl.querySelectorAll('.dropdown-menu a');
-        
+        const dropdownLinks = navUl.querySelectorAll(".dropdown-menu a");
+
         // Combiner tous les liens
         const allLinks = [...navLinks, ...dropdownLinks];
-        
-        allLinks.forEach(link => {
-            link.addEventListener('click', () => {
+
+        allLinks.forEach((link) => {
+            link.addEventListener("click", () => {
                 if (window.innerWidth <= 820) {
-                    navUl.classList.remove('open');
-                    burger.src = './assets/burger.png';
+                    navUl.classList.remove("open");
+                    burger.src = "./assets/burger.png";
                 }
             });
         });
     } else {
         console.error("L'élément burger ou nav n'a pas été trouvé");
     }
-    
+
     // ===========================
     // GESTION DES DROPDOWNS
     // ===========================
-    const dropdowns = document.querySelectorAll('.dropdown');
+    const dropdowns = document.querySelectorAll(".dropdown");
 
     // Fonction pour fermer tous les dropdowns
     function closeAllDropdowns() {
-        dropdowns.forEach(dropdown => {
-            dropdown.classList.remove('active');
+        dropdowns.forEach((dropdown) => {
+            dropdown.classList.remove("active");
         });
     }
 
     // Gestion des événements pour chaque dropdown
-    dropdowns.forEach(dropdown => {
-        const toggle = dropdown.querySelector('.dropdown-toggle');
-        
+    dropdowns.forEach((dropdown) => {
+        const toggle = dropdown.querySelector(".dropdown-toggle");
+
         // Gestion du clic sur le bouton toggle
-        toggle.addEventListener('click', function(e) {
+        toggle.addEventListener("click", function (e) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             // Si ce dropdown est déjà actif, le fermer
-            if (dropdown.classList.contains('active')) {
+            if (dropdown.classList.contains("active")) {
                 closeAllDropdowns();
                 return;
             }
-            
+
             // Fermer tous les autres dropdowns
             closeAllDropdowns();
-            
+
             // Activer ce dropdown
-            dropdown.classList.add('active');
+            dropdown.classList.add("active");
         });
 
         // Empêcher la fermeture quand on clique à l'intérieur du dropdown
-        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        const dropdownMenu = dropdown.querySelector(".dropdown-menu");
         if (dropdownMenu) {
-            dropdownMenu.addEventListener('click', function(e) {
+            dropdownMenu.addEventListener("click", function (e) {
                 e.stopPropagation();
             });
         }
     });
 
     // Fermer les dropdowns en cliquant ailleurs ou sur l'overlay mobile
-    document.addEventListener('click', function(e) {
+    document.addEventListener("click", function (e) {
         // Si on clique sur l'overlay mobile (::before pseudo-element)
-        const activeDropdown = document.querySelector('.dropdown.active');
+        const activeDropdown = document.querySelector(".dropdown.active");
         if (activeDropdown && window.innerWidth <= 820) {
-            const dropdownMenu = activeDropdown.querySelector('.dropdown-menu');
-            if (dropdownMenu && !dropdownMenu.contains(e.target) && !e.target.closest('.dropdown-toggle')) {
+            const dropdownMenu = activeDropdown.querySelector(".dropdown-menu");
+            if (
+                dropdownMenu &&
+                !dropdownMenu.contains(e.target) &&
+                !e.target.closest(".dropdown-toggle")
+            ) {
                 closeAllDropdowns();
             }
-        } else if (!e.target.closest('.dropdown')) {
+        } else if (!e.target.closest(".dropdown")) {
             closeAllDropdowns();
         }
     });
 
     // Fermer avec la touche Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
             closeAllDropdowns();
         }
     });
-    
+
     // ===========================
-    // GESTION DES ANIMATIONS
+    // ZONE : CODE SPÉCIFIQUE AU LECTEUR VIDÉO
+    // Ici, ajoutez les comportements personnalisés du lecteur vidéo :
+    // - gestion play/pause, big-play temporaire,
+    // - mise à jour de la barre de progression et du seek-handle,
+    // - gestion du volume / mute / slider,
+    // - navigation (clic sur la barre) et fullscreen,
+    // - écouteurs loadedmetadata/timeupdate, etc.
+    // Conserver la logique commune en dehors de cette section.
     // ===========================
 
-    // Animation shimmer pour les éléments avec dégradés
-    function initShimmerAnimations() {
-        // - Sélectionner les éléments avec background sombre (containers)
-        const darkShimmerElements = document.querySelectorAll(
-            ".pwd-generator__header,.pwd-generator"
-        );
+    // Détecte Firefox (desktop ou Android)
+    const isFirefox = /firefox/i.test(navigator.userAgent);
 
-        // - Sélectionner les éléments avec background doré (texte uniquement)
-        const goldShimmerElements = document.querySelectorAll(
-            ".pwd-generator__title, .pwd-generator__title--style, .pwd-generator__desc, .pwd-generator__range-label, .pwd-generator__checkbox-label, .pwd-generator__checkboxes-desc"
-        );
+    // Récupère éléments
+    const video = document.getElementById("video");
+    const wrapper = document.querySelector(".video-wrap");
 
-        // - Sélectionner le conteneur principal pour animation de fond
-        const goldDiv = document.querySelector(".pwd-generator-page");
-
-        // - Appliquer les styles CSS pour les éléments sombres
-        if (darkShimmerElements.length > 0) {
-            darkShimmerElements.forEach((el) => {
-                el.style.background =
-                    "linear-gradient(90deg, rgba(51, 51, 51, 0.9), #222, rgba(51, 51, 51, 0.9))";
-                el.style.backgroundSize = "200% 100%";
-                el.style.animation = "shimmer 5s ease-in-out infinite";
-            });
-        }
-
-        // - Appliquer les styles CSS pour les éléments dorés
-        if (goldShimmerElements.length > 0) {
-            goldShimmerElements.forEach((el) => {
-                el.style.background =
-                    "linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e)";
-                el.style.backgroundSize = "200% 100%";
-                el.style.animation = "shimmer 5s ease-in-out infinite";
-                el.style.webkitBackgroundClip = "text";
-                el.style.backgroundClip = "text";
-                el.style.webkitTextFillColor = "transparent";
-                el.style.color = "transparent"; // Fallback pour les navigateurs qui ne supportent pas background-clip
-            });
-        }
-
-        // - Appliquer l'animation shimmer au conteneur principal
-        if (goldDiv) {
-            goldDiv.style.background =
-                "linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e)";
-            goldDiv.style.backgroundSize = "200% 100%";
-        }
+    // Helpers cross-browser pour fullscreen
+    function requestFullscreen(el) {
+        if (!el) return Promise.reject();
+        return (
+            el.requestFullscreen ||
+            el.webkitRequestFullscreen ||
+            el.mozRequestFullScreen ||
+            el.msRequestFullscreen
+        ).call(el);
+    }
+    function exitFullscreen() {
+        return (
+            document.exitFullscreen ||
+            document.webkitExitFullscreen ||
+            document.mozCancelFullScreen ||
+            document.msExitFullscreen
+        ).call(document);
     }
 
-    // Styles pour boutons et inputs
-    function initButtonAndInputStyles() {
-        // - Styliser le bouton principal
-        const generateBtn = document.querySelector('.pwd-generator__generate-pwd-btn');
-        if (generateBtn) {
-            generateBtn.style.background = 'linear-gradient(135deg, #f7df1e, #ffa500)';
-            generateBtn.style.color = '#222';
-            generateBtn.style.border = 'none';
-            generateBtn.style.padding = '1rem 2rem';
-            generateBtn.style.fontSize = '1.1rem';
-            generateBtn.style.fontWeight = 'bold';
-            generateBtn.style.borderRadius = '10px';
-            generateBtn.style.cursor = 'pointer';
-            generateBtn.style.transition = 'all 0.3s ease';
-            generateBtn.style.boxShadow = '0 4px 15px rgba(247, 223, 30, 0.3)';
-            
-            // Effets hover
-            generateBtn.addEventListener('mouseenter', () => {
-                generateBtn.style.transform = 'translateY(-2px)';
-                generateBtn.style.boxShadow = '0 6px 20px rgba(247, 223, 30, 0.5)';
-            });
-            
-            generateBtn.addEventListener('mouseleave', () => {
-                generateBtn.style.transform = 'translateY(0)';
-                generateBtn.style.boxShadow = '0 4px 15px rgba(247, 223, 30, 0.3)';
-            });
-        }
-
-        // - Styliser le bouton de copie
-        const copyBtn = document.querySelector('.pwd-generator__copy-btn');
-        if (copyBtn) {
-            copyBtn.style.background = '#f7df1e';
-            copyBtn.style.border = 'none';
-            copyBtn.style.padding = '0.5rem';
-            copyBtn.style.borderRadius = '5px';
-            copyBtn.style.cursor = 'pointer';
-            copyBtn.style.transition = 'all 0.3s ease';
-            
-            copyBtn.addEventListener('mouseenter', () => {
-                copyBtn.style.background = '#ffa500';
-                copyBtn.style.transform = 'scale(1.1)';
-            });
-            
-            copyBtn.addEventListener('mouseleave', () => {
-                copyBtn.style.background = '#f7df1e';
-                copyBtn.style.transform = 'scale(1)';
-            });
-        }
-
-        // - Styliser le slider
-        const rangeInput = document.querySelector('.pwd-generator__range-input');
-        if (rangeInput) {
-            rangeInput.style.width = '100%';
-            rangeInput.style.height = '5px';
-            rangeInput.style.background = '#333';
-            rangeInput.style.borderRadius = '5px';
-            rangeInput.style.outline = 'none';
-            rangeInput.style.webkitAppearance = 'none';
-            rangeInput.style.appearance = 'none';
-        }
-
-        // - Styliser les checkboxes
-        const checkboxes = document.querySelectorAll('.pwd-generator__checkbox');
-        checkboxes.forEach(checkbox => {
-            checkbox.style.accentColor = '#f7df1e';
-        });
-
-        // - Styliser les labels
-        const labels = document.querySelectorAll('.pwd-generator__checkbox-label, .pwd-generator__range-label');
-        labels.forEach(label => {
-            label.style.color = '#f5f7fa';
-            label.style.cursor = 'pointer';
-        });
-
-        // - Styliser la description des options
-        const checkboxDesc = document.querySelector('.pwd-generator__checkboxes-desc');
-        if (checkboxDesc) {
-            checkboxDesc.style.fontWeight = 'bold';
-            checkboxDesc.style.color = '#f7df1e';
-            checkboxDesc.style.marginBottom = '1rem';
-        }
-    }
-
-    // Animations d'entrée au chargement de la page
-    function initLoadAnimations() {
-        // - Sélectionner les éléments à animer
-        const animatedElements = [
-            // - Définir les éléments et leurs délais d'animation
-            { selector: ".pwd-generator__header", delay: 100 },
-            { selector: ".pwd-generator", delay: 400 },
-        ];
-
-        // - Appliquer les animations
-        animatedElements.forEach(({ selector, delay }) => {
-            // - Sélectionner l'élément
-            const element = document.querySelector(selector);
-
-            if (element) {
-                // - Appliquer opacity: 0 et translateY au début
-                element.style.opacity = 0;
-                element.style.transform = "translateY(30px)";
-
-                // - Animer vers opacity: 1 et translateY: 0 avec setTimeout
-                setTimeout(() => {
-                    element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-                    element.style.opacity = 1;
-                    element.style.transform = "translateY(0)";
-                }, delay);
+    if (isFirefox) {
+        // Quand l'utilisateur lance la lecture, on tente de mettre le wrapper en "fullscreen" contrôlable
+        video.addEventListener("play", async () => {
+            try {
+                // Fullscreen exige généralement une interaction utilisateur — ici on est dans le handler 'play'
+                await requestFullscreen(wrapper);
+                // Optionnel : ajouter une classe pour adapter le style quand on est en fullscreen contrôlé
+                wrapper.classList.add("vp-fullscreen-controlled");
+            } catch (e) {
+                // Échec possible sur certains mobiles ; laisser le navigateur gérer la lecture
+                console.warn("Impossible d'entrer en fullscreen contrôlé :", e);
             }
         });
-    }
-    
-    // ===========================
-    // GÉNÉRATEUR DE MOT DE PASSE 🔒
-    // ===========================
-    
-    // ===========================
-    // A. VARIABLES ET CONSTANTES
-    // ===========================
-    
-    // TODO: Créer des tableaux contenant les caractères pour chaque type
-    // - Caractères minuscules (a-z)
-    const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'.split('');
-    // - Caractères majuscules (A-Z) 
-    const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    // - Nombres (0-9)
-    const numberChars = '0123456789'.split('');
-    // - Symboles spéciaux (!@#$%^&*()_+-=[]{}|;:,.<>?)
-    const symbolChars = '!@#$%^&*()_+-=[]{}|;:,.<>?'.split('');
-    // - Tableau pour stocker les caractères disponibles
-    let availableChars = [];
-    // - Taille du mot de passe (par défaut 12)
-    let passwordLength = 12;
 
-    // TODO: Sélectionner les éléments du DOM
-    // - Input range pour la taille
-    const rangeInput = document.querySelector('.pwd-generator__range-input');
-    // - Label pour afficher la taille actuelle
-    const rangeLabelElement = document.querySelector('.pwd-generator__range-label');
-    // - Checkboxes pour les options
-    const lowercaseCheckbox = document.querySelector('#lowercaseChars');
-    const uppercaseCheckbox = document.querySelector('#uppercaseChars');
-    const numberCheckbox = document.querySelector('#numberChars');
-    const symbolCheckbox = document.querySelector('#symbolChars');
-    // - Zone d'affichage du résultat
-    const resultDisplay = document.querySelector('.pwd-generator__generated-pwd');
-    // - Bouton de génération
-    const generateButton = document.querySelector('.pwd-generator__generate-pwd-btn');
-    // - Bouton de copie
-    const copyButton = document.querySelector('.pwd-generator__copy-btn');
-    // - Zone des messages d'erreur
-    const errorMessageElement = document.querySelector('.pwd-generator__error-msg');
-    
-    // ===========================
-    // B. FONCTIONS UTILITAIRES
-    // ===========================
-    
-    // TODO: Fonction de génération sécurisée de nombres aléatoires
-    // Utiliser window.crypto.getRandomValues() pour plus de sécurité
-    // que Math.random()
-    function getSecureRandomNumber(max) {
-        // - Créer un tableau pour stocker la valeur aléatoire
-        const array = new Uint32Array(1);
-        // - Générer une valeur cryptographiquement sécurisée
-        window.crypto.getRandomValues(array);
-        // - Retourner un nombre entre 0 et max-1
-        return array[0] % max;
-    }
-    
-    // TODO: Fonction pour récupérer un caractère aléatoire d'un tableau
-    function getRandomCharacter(charactersArray) {
-        // TODO: Utiliser getSecureRandomNumber() pour sélectionner un index
-        // - Vérifier que le tableau n'est pas vide
-        if (charactersArray.length === 0) {
-            throw new Error("Le tableau de caractères est vide");
-        }
-        // - Utiliser getSecureRandomNumber() pour sélectionner un index
-        const randomIndex = getSecureRandomNumber(charactersArray.length);
-        // - Retourner le caractère à l'index sélectionné
-        return charactersArray[randomIndex];
-    }
-    
-    // TODO: Fonction pour construire le tableau de caractères disponibles
-    // en fonction des checkboxes cochées
-    function buildCharacterSet() {
-        // TODO: Combiner les tableaux de caractères correspondants
-        // - Initialiser le tableau des caractères disponibles
-        let characterSet = [];
-
-        // - Vérifier quelles checkboxes sont cochées et ajouter les caractères
-        if (lowercaseCheckbox && lowercaseCheckbox.checked) {
-            characterSet = characterSet.concat(lowercaseChars);
-        }
-        if (uppercaseCheckbox && uppercaseCheckbox.checked) {
-            characterSet = characterSet.concat(uppercaseChars);
-        }
-        if (numberCheckbox && numberCheckbox.checked) {
-            characterSet = characterSet.concat(numberChars);
-        }
-        if (symbolCheckbox && symbolCheckbox.checked) {
-            characterSet = characterSet.concat(symbolChars);
-        }
-
-        // - Vérifier qu'au moins une option est cochée
-        if (characterSet.length === 0) {
-            throw new Error("Veuillez sélectionner au moins une option de génération");
-        }
-        // - Retourner le tableau final
-        return characterSet;
-    }
-    
-    // ===========================
-    // C. GÉNÉRATION DU MOT DE PASSE
-    // ===========================
-    
-    // TODO: Fonction principale de génération
-    function generatePassword() {
-        try {
-            // - Effacer les messages d'erreur précédents
-            clearErrorMessage();
-            
-            // - Récupérer la taille désirée depuis l'input range
-            const length = parseInt(rangeInput.value);
-
-            // - Construire le set de caractères disponibles
-            const characterSet = buildCharacterSet();
-
-            // - Générer le mot de passe caractère par caractère
-            let password = "";
-            for (let i = 0; i < length; i++) {
-                password += getRandomCharacter(characterSet);
-            }
-
-            // - Afficher le résultat dans la zone prévue
-            if (resultDisplay) {
-                resultDisplay.textContent = password;
-            }
-
-            // - Activer l'animation loading sur le titre
-            const titleElement = document.querySelector('.pwd-generator__title');
-            if (titleElement) {
-                titleElement.classList.add('js-active-generator');
-                // - Retirer l'animation loading après un court délai
-                setTimeout(() => {
-                    titleElement.classList.remove('js-active-generator');
-                }, 2000);
-            }
-
-        } catch (error) {
-            // - Gérer les erreurs (aucune option cochée, etc.)
-            displayErrorMessage(error.message);
-        }
-    }
-    
-    // ===========================
-    // D. FONCTIONS UTILITAIRES UI
-    // ===========================
-    
-    // TODO: Fonction pour copier le mot de passe dans le presse-papier
-    function copyPasswordToClipboard() {
-        // TODO: Utiliser l'API Clipboard ou fallback
-        // TODO: Afficher un message de confirmation
-    }
-    
-    // TODO: Fonction pour mettre à jour l'affichage de la taille
-    function updatePasswordLengthDisplay() {
-        // - Récupérer la valeur actuelle du range
-        const currentLength = rangeInput.value;
-        
-        // - Mettre à jour le label avec la valeur actuelle
-        if (rangeLabelElement) {
-            rangeLabelElement.textContent = `Taille du mot de passe : ${currentLength}`;
-        }
-        
-        // - Mettre à jour la variable globale
-        passwordLength = parseInt(currentLength);
-    }
-    
-    // TODO: Fonction pour afficher les messages d'erreur
-    function displayErrorMessage(message) {
-        if (errorMessageElement) {
-            // - Afficher le message dans la zone d'erreur
-            errorMessageElement.textContent = message;
-            errorMessageElement.style.color = '#ff6b6b';
-            errorMessageElement.style.fontWeight = 'bold';
-            errorMessageElement.style.opacity = '1';
-            
-            // - Masquer automatiquement après 5 secondes
-            setTimeout(() => {
-                clearErrorMessage();
-            }, 5000);
-        }
-    }
-
-    // TODO: Fonction pour afficher les messages de succès
-    function displaySuccessMessage(message) {
-        if (errorMessageElement) {
-            // - Afficher le message de succès
-            errorMessageElement.textContent = message;
-            errorMessageElement.style.color = '#4ecdc4';
-            errorMessageElement.style.fontWeight = 'bold';
-            errorMessageElement.style.opacity = '1';
-            
-            // - Masquer automatiquement après 3 secondes
-            setTimeout(() => {
-                clearErrorMessage();
-            }, 3000);
-        }
-    }
-    
-    // TODO: Fonction pour effacer les messages d'erreur
-    function clearErrorMessage() {
-        if (errorMessageElement) {
-            // - Vider la zone des messages d'erreur
-            errorMessageElement.textContent = '';
-            errorMessageElement.style.opacity = '0';
-        }
-    }
-    
-    // ===========================
-    // E. GESTION DES ÉVÉNEMENTS
-    // ===========================
-    
-    // TODO: Événement pour le bouton de génération
-    // Clic sur "Générer" -> appeler generatePassword()
-    if (generateButton) {
-        generateButton.addEventListener('click', generatePassword);
-    }
-
-    // TODO: Événement pour le bouton de copie  
-    // Clic sur l'icône de copie -> appeler copyPasswordToClipboard()
-    
-    // TODO: Événement pour l'input range
-    // Changement de valeur -> appeler updatePasswordLengthDisplay()
-    if (rangeInput) {
-        rangeInput.addEventListener('input', updatePasswordLengthDisplay);
-        rangeInput.addEventListener('change', updatePasswordLengthDisplay);
-    }
-    
-    // TODO: Événements pour les checkboxes
-    // Changement d'état -> effacer les messages d'erreur
-    const allCheckboxes = [lowercaseCheckbox, uppercaseCheckbox, numberCheckbox, symbolCheckbox];
-    allCheckboxes.forEach(checkbox => {
-        if (checkbox) {
-            checkbox.addEventListener('change', () => {
-                clearErrorMessage();
-            });
-        }
-    });
-
-    // TODO: Événement optionnel : génération automatique
-    // Quand une option change -> régénérer automatiquement
-    allCheckboxes.forEach(checkbox => {
-        if (checkbox) {
-            checkbox.addEventListener('change', () => {
-                // - Régénérer automatiquement si il y a déjà un mot de passe affiché
-                if (resultDisplay && resultDisplay.textContent.trim() !== '') {
-                    generatePassword();
+        // Quitter fullscreen contrôlé à la pause / fin
+        ["pause", "ended"].forEach((evt) => {
+            video.addEventListener(evt, () => {
+                try {
+                    exitFullscreen();
+                } catch (e) {
+                    /* ignore */
                 }
+                wrapper.classList.remove("vp-fullscreen-controlled");
             });
-        }
-    });
+        });
 
-    // ===========================
-    // F. INITIALISATION
-    // ===========================
-    
-    // TODO: Appeler les fonctions d'initialisation
-    function initPasswordGenerator() {
-        // - Mettre à jour l'affichage initial de la taille
-        updatePasswordLengthDisplay();
-        
-        // - Générer un premier mot de passe par défaut
-        generatePassword();
-        
-        // - Effacer les messages d'erreur au démarrage
-        clearErrorMessage();
-        
-        console.log('Générateur de mot de passe initialisé avec succès');
+        // Synchroniser si utilisateur sort du fullscreen via UI système
+        document.addEventListener("fullscreenchange", () => {
+            if (!document.fullscreenElement)
+                wrapper.classList.remove("vp-fullscreen-controlled");
+        });
     }
 
-    // Initialiser les animations
-    initShimmerAnimations();
-    initLoadAnimations();
-    initButtonAndInputStyles();
+    // Élément vidéo principal (<video> ou wrapper) et bouton de contrôle
+    const videoPlayer = document.querySelector(".video-element");
+    const playbackToggler = document.querySelector(".vp-play");
+    const bigPlaybackToggler = document.querySelector(".vp-big-play");
 
-    // Initialiser le générateur de mot de passe
-    initPasswordGenerator();
+    // timeout pour la visibilité temporaire du big play
+    let bigPlayTimeout = null;
+
+    // Attacher les écouteurs seulement si les éléments existent pour éviter des erreurs si le script est chargé avant le HTML ou dans une page sans ces composants.
+    if (videoPlayer) videoPlayer.addEventListener("click", togglePlay);
+    if (playbackToggler) playbackToggler.addEventListener("click", togglePlay);
+    if (bigPlaybackToggler) bigPlaybackToggler.addEventListener("click", togglePlay);
+
+    /**
+     * togglePlay
+     *
+     * Basculer la lecture / pause de la vidéo et mettre à jour l'interface associée.
+     *
+     * Comportement :
+     * - lance ou met en pause la lecture sur l'élément vidéo.
+     * - met à jour les attributs ARIA (aria-pressed, aria-label) des contrôles concernés.
+     * - remplace le contenu texte des boutons de contrôle (petit bouton et big-play) pour
+     *   refléter l'état (ex. "▶" -> "❚❚").
+     * - pour le bouton big-play : l'afficher brièvement (classe CSS `vp-visible-temp`) après
+     *   l'action, puis le masquer de nouveau — il restera visible au hover grâce au CSS.
+     *
+     * Accessibilité :
+     * - conserve des labels clairs pour les lecteurs d'écran ;
+     * - évite de modifier le DOM de façon imprévisible (mise à jour contrôlée des textes/attributs).
+     *
+     * Remarques d'implémentation :
+     * - la fonction n'a pas de paramètre ; elle utilise les références aux éléments déjà capturés
+     *   (videoPlayer, playbackToggler, bigPlaybackToggler).
+     * - la logique d'affichage temporaire du big-play est réalisée via un timeout stocké dans
+     *   `bigPlayTimeout` (annulation si une nouvelle action survient).
+     */
+    function togglePlay() {
+        if (!videoPlayer) return; // sécurité
+
+        // Basculer la lecture (faire une seule action)
+        if (videoPlayer.paused) {
+            videoPlayer.play();
+        } else {
+            videoPlayer.pause();
+        }
+
+        // Déterminer l'état après l'action
+        const isPlaying = !videoPlayer.paused;
+
+        // Mettre à jour les attributs ARIA et l'icône uniquement si les togglers existent
+        if (playbackToggler) {
+            playbackToggler.setAttribute("aria-pressed", String(isPlaying));
+            playbackToggler.setAttribute(
+                "aria-label",
+                isPlaying ? "Mettre la vidéo en pause" : "Lancer la vidéo"
+            );
+
+            // Remplace le contenu texte du bouton (▶ / ❚❚ ou ❚❚ / ▶)
+            playbackToggler.textContent = isPlaying ? "❚❚ / ▶" : "▶ / ❚❚";
+        }
+
+        if (bigPlaybackToggler) {
+            // ARIA
+            bigPlaybackToggler.setAttribute("aria-pressed", String(isPlaying));
+            bigPlaybackToggler.setAttribute(
+                "aria-label",
+                isPlaying ? "Mettre la vidéo en pause" : "Lancer la vidéo"
+            );
+
+            // Remplace le contenu texte du bouton (▶ ou ❚❚)
+            bigPlaybackToggler.textContent = isPlaying ? "❚❚" : "▶";
+
+            // Affiche le bouton un court instant (même sans hover), puis le cacher de nouveau
+            bigPlaybackToggler.classList.add("vp-visible-temp");
+            if (bigPlayTimeout) clearTimeout(bigPlayTimeout);
+            bigPlayTimeout = setTimeout(() => {
+                bigPlaybackToggler.classList.remove("vp-visible-temp");
+                // restaurer l'icône par défaut (play) pour l'affichage au hover
+                bigPlaybackToggler.textContent = isPlaying ? "❚❚" : "▶";
+            }, 900); // visible 900ms
+        }
+    }
+
+    // Élément affichage durée totale de la vidéo (DOM)
+    const vpDuration = document.querySelector('.vp-duration');
+    // Élément affichage temps courant de la vidéo (DOM)
+    const vpCurrent = document.querySelector('.vp-current');
+
+    // Valeur courante en secondes (mise à jour lors de la lecture)
+    let current;
+    // Durée totale de la vidéo en secondes (remplie après chargement des métadonnées)
+    let totalDuration;
+
+    window.addEventListener('load', fillDurationVariables);
+
+    /**
+     * Remplit les variables `current` et `totalDuration` à partir de l'élément vidéo
+     * puis met à jour les affichages visibles (durée totale et temps actuel).
+     * Appelée au chargement de la page (load).
+    */    
+    function fillDurationVariables() {
+        current = videoPlayer.currentTime;
+        totalDuration = videoPlayer.duration;
+
+        displayFormattedValue(totalDuration, vpDuration);
+        displayFormattedValue(current, vpCurrent);
+    }
+
+    /**
+     * Convertit une valeur en secondes en une chaîne "MM:SS" et l'affiche dans
+     * l'élément DOM passé en paramètre.
+     *
+     * @param {number} val - durée en secondes.
+     * @param {Element} element - élément DOM où afficher le texte formaté.
+    */
+    function displayFormattedValue(val, element) {
+        if (!element) return;
+
+        const minutes = Math.floor(val / 60); // minutes entières
+        let seconds = Math.floor(val % 60); // secondes (réaffectable pour le 0-padding)
+
+        if (seconds < 10) {
+            seconds = `0${seconds}`;
+        }
+
+        element.textContent = `${minutes}:${seconds}`;
+    }
+
+    const progressBar = document.querySelector('.vp-progress__bar');
+    const seekHandle = document.querySelector('.vp-progress__seek-handle');
+
+    // s'assurer que la durée totale est initialisée (écouteur loadedmetadata ailleurs)
+    if (videoPlayer) {
+      videoPlayer.addEventListener('timeupdate', handleTimeUpdate);
+      // si les metadata sont déjà prêtes, forcer une initialisation de la position
+      videoPlayer.addEventListener('loadedmetadata', handleTimeUpdate);
+    }
+
+    /**
+     * Met à jour la barre de progression et l'affichage du temps courant
+     * lors de la lecture de la vidéo.
+     */
+    function handleTimeUpdate() {
+        if (!videoPlayer || !progressBar) return;
+
+        // temps courant
+        const currentTime = videoPlayer.currentTime || 0;
+        displayFormattedValue(currentTime, vpCurrent);
+
+        // utiliser totalDuration connu ou video.duration en fallback
+        const denom = totalDuration || (isFinite(videoPlayer.duration) ? videoPlayer.duration : 0);
+        let progressPosition = 0;
+        if (denom > 0) progressPosition = currentTime / denom;
+
+        // clamp entre 0 et 1 pour éviter NaN / overflow
+        const clamped = Math.max(0, Math.min(1, progressPosition));
+
+        // appliquer la transformation; CSS doit définir transform-origin: left;
+        progressBar.style.transform = `scaleX(${clamped})`;
+
+        // positionner la pastille de seek : left en pourcentage (translate centré en CSS)
+        if (seekHandle) {
+          seekHandle.style.left = `${clamped * 100}%`;
+        }
+
+        if (videoPlayer.ended) {
+            playbackToggler.textContent = "▶ / ❚❚";
+            playbackToggler.setAttribute("aria-pressed", "false");
+            playbackToggler.setAttribute("aria-label", "Lancer la vidéo");
+
+            bigPlaybackToggler.textContent = "▶";
+            bigPlaybackToggler.setAttribute("aria-pressed", "false");
+            bigPlaybackToggler.setAttribute("aria-label", "Lancer la vidéo");
+        }
+    }
+
+    const progressBarContainer = document.querySelector('.vp-progress');
+
+    progressBarContainer.addEventListener('click', handleProgressNavigation);
+
+    /**
+     * Gère la navigation dans la vidéo en fonction du clic sur la barre de progression.
+     *
+     * @param {MouseEvent} e - L'événement de clic.
+     */
+    function handleProgressNavigation(e) {
+        if (!videoPlayer || !totalDuration) return;
+
+        const rect = progressBarContainer.getBoundingClientRect();
+        const clickPositionInProgressBar = e.clientX - rect.left;
+        const clickProgressRatio = clickPositionInProgressBar / rect.width;
+
+        videoPlayer.currentTime = clickProgressRatio * totalDuration;
+    }
+
+    const muteBtn = document.querySelector('.vp-mute');
+    const volumeSlider = document.querySelector('.vp-volume');
+
+    muteBtn.addEventListener('click', handleMute);
+
+    /**
+     * Gère le clic sur le bouton de mute/unmute.
+     */
+    function handleMute() {
+        if (!videoPlayer) return;
+
+        if (videoPlayer.volume === 0) {
+            videoPlayer.volume = 1;
+            volumeSlider.value = 100;
+        }
+        videoPlayer.muted = !videoPlayer.muted;
+        updateMuteUI();
+    }
+
+    function updateMuteUI() {
+        if (!videoPlayer) return;
+
+        muteBtn.textContent = videoPlayer.muted ? "🔇" : "🔊";
+        muteBtn.setAttribute('aria-pressed', videoPlayer.muted);
+        muteBtn.setAttribute('aria-label', videoPlayer.muted ? 'Remettre le son en place' : 'Mettre en sourdine');
+        muteBtn.setAttribute('title', videoPlayer.muted ? 'Activer le son' : 'Couper le son');
+    }
+
+    volumeSlider.addEventListener('input', handleVolumeModification);
+
+    /**
+     * Gère la modification du volume via le slider.
+     */
+    function handleVolumeModification() {
+        if (!videoPlayer) return;
+
+        videoPlayer.volume = volumeSlider.value / 100;
+        videoPlayer.muted = videoPlayer.volume === 0;
+
+        updateMuteUI();
+    }
+
+    const fullscreenToggler = document.querySelector('.vp-fullscreen');
+
+    const videoContainer = document.querySelector('.video-player');
+
+    videoPlayer.addEventListener('dblclick', toggleFullscreen);
+    fullscreenToggler.addEventListener('click', toggleFullscreen);
+
+    /**
+     * Bascule le mode plein écran pour le conteneur vidéo.
+     */
+    function toggleFullscreen() {
+        if (!videoContainer) return;
+
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            videoContainer.requestFullscreen();
+        }
+    }
 });

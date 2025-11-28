@@ -247,83 +247,224 @@ body {
   padding-top: 80px;
 }
 
+/* ===========================
+  JEU DES CARTES MÉMOIRE - STYLES MODERNISÉS
+  =========================== */
 .memory-game {
   min-height: 100vh;
-  background-image: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
-  padding: 50px 20px 10px;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  padding: 10px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
+/* ===========================
+  EN-TÊTE DU JEU
+  =========================== */
 .memory-game__header {
-  text-align: center !important;
-  color: #222 !important;
+  text-align: center;
+  color: #f5f7fa;
+  margin-bottom: 40px;
+  background: rgba(51, 51, 51, 0.9);
+  border: 2px solid #f7df1e;
+  border-radius: 20px;
+  padding: 30px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(247, 223, 30, 0.2);
+  max-width: 800px;
+  width: 100%;
 }
 
 .memory-game__title {
-  font-family: Raleway !important;
-  font-size: 62px !important;
-  font-weight: 800 !important;
-  margin-bottom: 4px !important;
+  font-family: 'Raleway', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #f7df1e;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(45deg, #f7df1e, #ffd700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .memory-game__advice {
-  font-size: 20px !important;
-  margin-bottom: 10px !important;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #ccc;
+  font-weight: 400;
+  opacity: 0.9;
 }
 
 .memory-game__score {
-  font-size: 20px !important;
-  margin-bottom: 46px !important;
+  font-size: 1.2rem;
+  margin-bottom: 0;
+  color: #f7df1e;
+  font-weight: 600;
+  background: rgba(247, 223, 30, 0.1);
+  padding: 8px 16px;
+  border-radius: 25px;
+  border: 1px solid rgba(247, 223, 30, 0.3);
+  display: inline-block;
 }
 
+/* ===========================
+  GRILLE DE CARTES - ZONE DE JEU
+  =========================== */
 .memory-game__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  max-width: 720px;
-  gap: 10px;
+  max-width: 800px;
+  width: 100%;
+  gap: 15px;
   margin: 0 auto;
   list-style-type: none;
+  padding: 30px;
+  background: rgba(51, 51, 51, 0.9);
+  border: 2px solid #f7df1e;
+  border-radius: 20px;  
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(247, 223, 30, 0.2);
 }
 
+/* ===========================
+  CARTES INDIVIDUELLES
+  =========================== */
 .memory-game__card {
   aspect-ratio: 1 / 1;
   perspective: 1000px;
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   opacity: 0;
-  transform: translateY(-10px);
   visibility: hidden;
-  animation: fade-in 0.4s ease-out forwards;
+  transition: transform 0.3s ease;
+  animation: cardFadeIn 0.6s ease forwards;
 }
 
-@keyframes fade-in {
+.memory-game__card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* Animation d'apparition des cartes - RÉACTIVÉE */
+@keyframes cardFadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+  }
+
   100% {
-    transform: translateY(0px);
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
   }
 }
 
+/* Animation en cascade pour chaque carte - RÉACTIVÉE */
+.memory-game__card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.memory-game__card:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.memory-game__card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.memory-game__card:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.memory-game__card:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+.memory-game__card:nth-child(6) {
+  animation-delay: 0.35s;
+}
+
+.memory-game__card:nth-child(7) {
+  animation-delay: 0.4s;
+}
+
+.memory-game__card:nth-child(8) {
+  animation-delay: 0.45s;
+}
+
+.memory-game__card:nth-child(9) {
+  animation-delay: 0.5s;
+}
+
+.memory-game__card:nth-child(10) {
+  animation-delay: 0.55s;
+}
+
+.memory-game__card:nth-child(11) {
+  animation-delay: 0.6s;
+}
+
+.memory-game__card:nth-child(12) {
+  animation-delay: 0.65s;
+}
+
+.memory-game__card:nth-child(13) {
+  animation-delay: 0.7s;
+}
+
+.memory-game__card:nth-child(14) {
+  animation-delay: 0.75s;
+}
+
+.memory-game__card:nth-child(15) {
+  animation-delay: 0.8s;
+}
+
+.memory-game__card:nth-child(16) {
+  animation-delay: 0.85s;
+}
+
+/* État de verrouillage des cartes */
 .js-card-locked {
   pointer-events: none;
+  opacity: 0.7;
 }
 
-
+/* ===========================
+  SYSTÈME DE RETOURNEMENT DES CARTES - BASÉ SUR L'OPACITÉ
+  =========================== */
 .memory-game__double-face {
   position: relative;
-  transform-style: preserve-3d;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.3);
-  transition: transform 0.6s ease-out;
-  will-change: transform;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(247, 223, 30, 0.1);
+  transition: box-shadow 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
+.memory-game__double-face:hover {
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5), 0 0 25px rgba(247, 223, 30, 0.3);
+}
+
+/* ===========================
+  FACES DES CARTES
+  =========================== */
 .memory-game__face,
 .memory-game__back {
   position: absolute;
-  border-radius: 5px;
-  background-color: #f1f1f1;
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid #f7df1e;
+  transition: opacity 0.6s ease, background 0.3s ease;
+  top: 0;
+  left: 0;
 }
 
 .memory-game__double-face,
@@ -333,20 +474,66 @@ body {
   height: 100%;
 }
 
-.memory-game__back {
-  backface-visibility: hidden;
-}
-
+/* Face avant (image du fruit - cachée par défaut) */
 .memory-game__face {
-  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #f7df1e 0%, #ffd700 100%);
+  opacity: 0; /* Cachée par défaut */
+  z-index: 2; /* Au-dessus de la face arrière */
 }
 
+/* Face arrière (par défaut visible - point d'interrogation) */
+.memory-game__back {
+  background: linear-gradient(135deg, #333 0%, #444 100%);
+  opacity: 1; /* Visible par défaut */
+  z-index: 1; /* En arrière-plan */
+}
+
+/* État actif - carte retournée */
+.js-double-face-active .memory-game__face {
+  opacity: 1; /* Face avant visible */
+}
+
+.js-double-face-active .memory-game__back {
+  opacity: 0; /* Face arrière cachée */
+}
+
+/* ===========================
+  IMAGES DES CARTES
+  =========================== */
 .memory-game__card-img {
-  width: 60%;
+  width: 65%;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
 }
 
-.js-double-face-active {
-  transform: rotateY(180deg);
+.memory-game__face .memory-game__card-img {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.memory-game__back .memory-game__card-img {
+  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(247, 223, 30, 0.3));
+}
+
+/* Animation de succès pour les paires trouvées */
+.js-card-success {
+  animation: cardSuccess 0.6s ease forwards;
+}
+
+@keyframes cardSuccess {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(247, 223, 30, 0.6);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
 }
 
 /* ===========================

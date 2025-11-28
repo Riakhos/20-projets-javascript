@@ -83,7 +83,7 @@ nav.main-nav ul li {
   position: relative;
 }
 
-nav.main-nav ul li > a {
+nav.main-nav ul li>a {
   color: #f7df1e;
   text-decoration: none;
   font-weight: bold;
@@ -94,7 +94,7 @@ nav.main-nav ul li > a {
   white-space: nowrap;
 }
 
-nav.main-nav ul li > a:hover {
+nav.main-nav ul li>a:hover {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -102,7 +102,7 @@ nav.main-nav ul li > a:hover {
 }
 
 /* États actifs pour les liens de navigation */
-nav.main-nav ul li > a.active {
+nav.main-nav ul li>a.active {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -146,17 +146,32 @@ nav.main-nav ul li > a.active {
   animation: slideInFromLeft 0.3s ease forwards;
 }
 
-.dropdown.active .dropdown-menu li:nth-child(1) { animation-delay: 0.1s; }
-.dropdown.active .dropdown-menu li:nth-child(2) { animation-delay: 0.15s; }
-.dropdown.active .dropdown-menu li:nth-child(3) { animation-delay: 0.2s; }
-.dropdown.active .dropdown-menu li:nth-child(4) { animation-delay: 0.25s; }
-.dropdown.active .dropdown-menu li:nth-child(5) { animation-delay: 0.3s; }
+.dropdown.active .dropdown-menu li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(5) {
+  animation-delay: 0.3s;
+}
 
 @keyframes slideInFromLeft {
   from {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -248,6 +263,7 @@ body {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
@@ -258,15 +274,17 @@ body {
 =========================== */
 .side-nav {
   width: 200px;
-  background: #333;
   color: white;
   height: calc(100vh - 80px);
   position: fixed;
   left: 0;
-  top: 80px;
   padding: 20px 0;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
   z-index: 100;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-right: 3px solid #28a745;
+  background: #333;
 }
 
 .side-nav nav {
@@ -320,7 +338,7 @@ body {
   color: transparent;
 }
 
-.side-nav__link:hover, .js-active-sidenav-link {
+.side-nav__link:hover {
   font-weight: bold;
   background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
   background-size: 200% 100%;
@@ -330,6 +348,41 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
   border-left-color: #f7df1e;
+}
+
+.js-active-sidenav-link {
+  font-weight: bold;
+  /* effet de fond similaire au hover : dégradé animé */
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  /* rendre le texte transparent si on veut l'effet clip (le texte enfant peut être forcé via la règle dédiée) */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  border: 2px solid #f7df1e;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.10);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  padding-left: 18px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Forcer la couleur du texte pour le lien latéral actif */
+.js-active-sidenav-link .side-nav__link-text {
+  color: #28a745 !important;
+  /* vert */
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+.js-active-sidenav-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
 }
 
 .side-nav__link-img {
@@ -349,7 +402,7 @@ body {
   margin-left: 200px;
   padding: 2rem;
   min-height: calc(100vh - 80px);
-  width: calc(100% - 200px);  
+  width: calc(100% - 200px);
 }
 
 /* ===========================
@@ -363,7 +416,7 @@ body {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 2px solid #f7df1e;
+  border: 3px solid #28a745;
   background: #333;
 }
 
@@ -408,7 +461,6 @@ body {
 }
 
 .search-container {
-  max-width: 600px;
   margin: 0 auto;
   text-align: center;
   margin-bottom: 3rem;
@@ -417,7 +469,7 @@ body {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 2px solid #f7df1e;
+  border: 3px solid #28a745;
   background: #333;
 }
 
@@ -511,8 +563,20 @@ body {
   color: transparent;
 }
 
+/* .search-status de base et variantes d'état */
 .search-status {
+  display: inline-block;
+  min-width: 140px;
+  /* réserve d'espace */
+  text-align: right;
   font-style: italic;
+  color: #999;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+/* État : recherche en cours -> shimmer gradient */
+.search-status--searching {
   background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
@@ -522,24 +586,42 @@ body {
   color: transparent;
 }
 
+/* État : prêt -> vert */
+.search-status--ready {
+  background: none;
+  color: #28a745;
+  /* vert */
+}
+
+/* État : aucun résultat -> rouge */
+.search-status--no-results {
+  background: none;
+  color: #e63946;
+  /* rouge */
+}
+
 /* ===========================
     ZONE D'AFFICHAGE DES RÉSULTATS
 =========================== */
 .results-section {
-  max-width: 1000px;
   margin: 0 auto;
 }
 
 /* Loader */
 .loader-container {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 3px solid #28a745;
+  background: #333;
 }
 
 .loader {
@@ -549,29 +631,46 @@ body {
 .loader img {
   width: 48px;
   height: 48px;
-  margin-bottom: 1rem;
-  animation: spin 1s linear infinite;
+  animation: spin 4s linear infinite;
+  filter: invert(86%) sepia(89%) saturate(400%) hue-rotate(1deg) brightness(95%) contrast(95%);
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .loader-text {
-  color: #666;
   font-size: 1rem;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 /* Messages d'erreur */
 .error-container {
   display: none;
-  padding: 3rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
   text-align: center;
-  background: rgba(255, 107, 107, 0.1);
-  border: 2px solid rgba(255, 107, 107, 0.3);
-  border-radius: 15px;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 3px solid #28a745;
+  background: #333;
 }
 
 .error-content {
@@ -591,34 +690,95 @@ body {
 }
 
 .error-text {
-  color: #666;
+  color: #999;
   margin-bottom: 1.5rem;
 }
 
 .error-retry-btn {
-  background: #ff6b6b;
-  color: white;
+  background: linear-gradient(135deg, #f7df1e, #ffa500);
+  color: #333;
   border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
   font-weight: bold;
-  transition: background 0.3s ease;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(247, 223, 30, 0.3);
+  position: relative;
+  overflow: visible;
+  z-index: 1;
 }
 
+/* bordure animée (lumineuse) derrière le bouton */
+.error-retry-btn::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  /* laisse un peu d'espace pour l'effet */
+  border-radius: 12px;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: -1;
+  /* placé sous le bouton */
+  pointer-events: none;
+}
+
+/* animation de pulsation */
+@keyframes btn-pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Hover : inversion des couleurs + pulsation + bordure animée */
 .error-retry-btn:hover {
-  background: #e55555;
+  background: #222;
+  /* foncé */
+  color: #333;
+  /* jaune éclatant */
+  transform: translateY(-2px);
+  animation: btn-pulse 900ms ease-in-out 1;
+  box-shadow: 0 12px 30px rgba(247, 223, 30, 0.12);
+}
+
+.error-retry-btn:hover::after {
+  opacity: 1;
+  transform: scale(1.02);
+  animation: shimmer 3s linear infinite;
+  /* réutilise le keyframe shimmer existant */
+}
+
+/* Focus visible amélioré pour accessibilité clavier */
+.error-retry-btn:focus-visible {
+  outline: 3px solid rgba(247, 223, 30, 0.35);
+  outline-offset: 4px;
 }
 
 /* ===========================
-   TABLEAU DES UTILISATEURS
-   =========================== */
+  TABLEAU DES UTILISATEURS
+=========================== */
 .table-wrapper {
-  background: white;
-  border-radius: 15px;
+  background: #333;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f7df1e;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.01);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 3px solid #28a745;
+  margin: 0 auto;
+  margin-bottom: 3rem;
 }
 
 .table {
@@ -627,25 +787,72 @@ body {
 }
 
 .table__heading {
-  background: #f7df1e;
-  color: #222;
   padding: 1rem;
   text-align: left;
   font-weight: bold;
   font-size: 1.1rem;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .table__results {
-  background: white;
+  /* laisser transparaître le fond du conteneur pour un blanc moins agressif */
+  background: transparent;
 }
 
 .table__content-row {
-  border-bottom: 1px solid #eee;
-  transition: background 0.3s ease;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.06);
+  transition: background 0.25s ease, color 0.2s ease;
+  background: transparent;
 }
 
-.table__content-row:hover {
-  background: rgba(247, 223, 30, 0.05);
+/* zebra striping */
+.table__content-row:nth-child(odd) {
+  background: #fbfbfd;
+}
+
+.table__content-row:nth-child(even) {
+  background: #333;
+}
+
+/* hover: inversion des couleurs (fond jaune fort + texte foncé) */
+.table__content-row:nth-child(odd):hover {
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.table__content-row:nth-child(even):hover {
+  /* fond dégradé animé pour les lignes paires au survol */
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* texte sombre sur hover pour les lignes paires */
+.table__content-row:nth-child(even):hover .table__data-info,
+.table__content-row:nth-child(even):hover .table__data-email,
+.table__content-row:nth-child(even):hover .table__data-phone {
+  color: #333;
+}
+
+.table__content-row:hover .table__data-info {
+  color: #666;
+  font-weight: 600;
+}
+
+.table__content-row:hover .table__data-email,
+.table__content-row:hover .table__data-phone {
+  color: #333;
 }
 
 .table__content-row:last-child {
@@ -668,12 +875,12 @@ body {
   height: 32px;
   border-radius: 50%;
   background: #f7df1e;
-  padding: 6px;
 }
 
 .table__data-info {
   font-weight: bold;
-  color: #333;
+  /* texte légèrement atténué pour meilleure intégration */
+  color: #666;
 }
 
 .table__data-email {
@@ -688,88 +895,109 @@ body {
 /* Message aucun résultat */
 .no-results-container {
   display: none;
-  padding: 3rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border: 2px solid #ddd;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 3px solid #28a745;
+  background: #333;
 }
 
 .no-results-content {
-  max-width: 400px;
   margin: 0 auto;
 }
 
 .no-results-title {
   font-size: 1.5rem;
-  color: #666;
+  color: #ff6b6b;
   margin: 1rem 0 0.5rem;
 }
 
 .no-results-text {
-  color: #888;
+  color: #ff6b6b;
   margin-bottom: 0.5rem;
 }
 
 .no-results-suggestion {
   color: #999;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 /* ===========================
     FOOTER DE L'APPLICATION
 =========================== */
 .app-footer {
+  width: 200px;
   text-align: center;
-  margin-top: 3rem;
   padding: 2rem;
-  color: #666;
+  color: #999;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-left: 3px solid #28a745;
+  background: #333;
 }
 
 .footer-info a {
-  color: #f7df1e;
-  text-decoration: none;
-  font-weight: bold;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .footer-info a:hover {
-  text-decoration: underline;
+  font-weight: bold;
 }
 
 /* ===========================
     ÉTATS D'AFFICHAGE
+    - Ces règles montrent/masquent les différents "panneaux"
+    - (loader / table / erreur / no-results) selon la classe d'état appliquée sur un conteneur parent (ex. <body>).
 =========================== */
 .loading .loader-container {
   display: flex;
 }
 
+/* Quand on est en loading, on cache les autres panneaux */
 .loading .table-wrapper,
 .loading .no-results-container,
 .loading .error-container {
   display: none;
 }
 
+/* Afficher le conteneur d'erreur quand .error est présent */
 .error .error-container {
   display: block;
 }
 
+/* Quand on est en erreur, cacher les autres panneaux
+   NOTE: correction -> ajout du point manquant devant .error */
 .error .loader-container,
 .error .table-wrapper,
 .error .no-results-container {
   display: none;
 }
 
+/* Afficher le panneau "aucun résultat" */
 .no-results .no-results-container {
   display: block;
 }
 
+/* Quand no-results est actif, cacher les autres panneaux */
 .no-results .loader-container,
 .no-results .table-wrapper,
 .no-results .error-container {
   display: none;
 }
 
+/* Quand tout est chargé, masquer le loader et afficher le tableau */
 .loaded .loader-container {
   display: none;
 }
@@ -781,17 +1009,17 @@ body {
 /* ===========================
     RESPONSIVE NAVIGATION
 =========================== */
-@media (width <= 820px) {
+@media (width <=820px) {
   /* Navigation responsive */
   nav.main-nav .nav-content {
     flex-direction: row;
     padding: 0 0.5em;
   }
-  
+
   .menu-burger {
     display: block !important;
   }
-  
+
   nav.main-nav ul {
     display: none;
     flex-direction: column;
@@ -806,21 +1034,21 @@ body {
     margin: 0;
     padding: 0.5em 0;
   }
-  
+
   nav.main-nav ul.open {
     display: flex;
   }
-  
+
   nav.main-nav ul li {
     width: 100%;
     text-align: center;
     border-bottom: 1px solid #444;
   }
-  
+
   nav.main-nav ul li:last-child {
     border-bottom: none;
   }
-  
+
   nav.main-nav ul li > a {
     color: #fff !important;
     background: none !important;
@@ -831,13 +1059,13 @@ body {
     transform: none !important;
     box-shadow: none !important;
   }
-  
+
   nav.main-nav ul li > a:hover,
   nav.main-nav ul li > a.active {
     background: #f7df1e !important;
     color: #222 !important;
   }
-  
+
   /* Ajuster l'espacement pour le menu mobile */
   nav.main-nav ul {
     gap: 0;
@@ -863,6 +1091,7 @@ body {
     RESPONSIVE DROPDOWNS MOBILE
 =========================== */
 @media (max-width: 820px) {
+  /* Force l'affichage des dropdowns en mode modal pour mobile */
   .dropdown-menu {
     position: fixed !important;
     top: 30% !important;
@@ -871,8 +1100,22 @@ body {
     width: 90% !important;
     max-width: 300px !important;
     z-index: 1001 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .dropdown.active .dropdown-menu {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) !important;
   }
 
+  /* Overlay sombre derrière la dropdown */
   .dropdown.active::before {
     content: '';
     position: fixed;
@@ -882,6 +1125,78 @@ body {
     height: 100vh;
     background: rgba(0, 0, 0, 0.7);
     z-index: 1000;
+  }  
+
+  /* Style des éléments de la liste en mobile */
+  .dropdown-menu ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+    background: #333 !important;
+    border: 2px solid #f7df1e !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .dropdown-menu li {
+    opacity: 1 !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    border-bottom: 1px solid #444 !important;
+  }
+
+  .dropdown-menu li:last-child {
+    border-bottom: none !important;
+  }
+
+  .dropdown-menu li a {
+    display: block !important;
+    padding: 1em 1.2em !important;
+    font-size: 0.95em !important;
+    text-align: left !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .dropdown-menu li:first-child a {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+  }
+
+  .dropdown-menu li:last-child a {
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+  }
+
+  .dropdown-menu li a:hover {
+    background: #f7df1e !important;
+    color: #222 !important;
+    transform: translateX(5px) !important;
+    padding-left: 1.5em !important;
+  }
+
+  .dropdown-menu li a.active {
+    background: rgba(247, 223, 30, 0.2) !important;
+    color: #f7df1e !important;
+    border-left: 3px solid #f7df1e !important;
+  }
+
+  /* Désactiver les animations en cascade pour mobile */
+  .dropdown.active .dropdown-menu li {
+    animation: none !important;
   }
 }
 
@@ -892,25 +1207,25 @@ body {
   .app-title {
     font-size: 2.2rem;
   }
-  
+
   .app-header {
     padding: 1.5rem;
   }
-  
+
   .search-input-wrapper {
     padding: 0.3rem;
   }
-  
+
   .table__heading,
   .table__data {
     padding: 0.8rem;
     font-size: 0.9rem;
   }
-  
+
   .table__data-content-wrapper {
     gap: 0.5rem;
   }
-  
+
   .table__data-img {
     width: 28px;
     height: 28px;
@@ -921,38 +1236,37 @@ body {
   .user-search-app {
     padding: 0.5rem;
   }
-  
+
   .app-title {
     font-size: 1.8rem;
   }
-  
+
   .app-description {
     font-size: 1rem;
   }
-  
+
   .app-header {
     padding: 1rem;
   }
-  
+
   .search-input {
     font-size: 0.9rem;
   }
-  
+
   .table__heading,
   .table__data {
     padding: 0.6rem;
     font-size: 0.8rem;
   }
-  
+
   .table__data-content-wrapper {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.3rem;
   }
-  
+
   .table__data-img {
     width: 24px;
     height: 24px;
   }
 }
-

@@ -2,7 +2,7 @@
 
 >ctrl+shift+v pour afficher ce fichier markdown sur VS Code
 
-### Objectif du projet 🎯
+## Objectif du projet 🎯
 
 Le **lecteur audio** est un composant que l’on retrouve fréquemment sur des plateformes telles que SoundCloud, Deezer ou Spotify.<br><br>
 Il est possible de concevoir des lecteurs audio à la fois **fonctionnels et esthétiques**, et c’est précisément l’objectif de ce projet.
@@ -12,7 +12,8 @@ Chaque fonctionnalité repose sur des **propriétés et méthodes spécifiques**
 Il est possible d’accéder à la **durée totale** d’un morceau, de connaître sa **position de lecture actuelle**, ou encore de contrôler la l**ecture** du morceau en cours.<br><br>
 N’hésitez pas à **explorer la documentation** ou à effectuer des recherches régulières : le navigateur offre de nombreuses **possibilités souvent méconnues**.
 
-### Critères à respecter 📋
+## Critères à respecter 📋
+
 - Performance  
 - Maintenabilité  
 - Code simple et facile à comprendre  
@@ -28,8 +29,8 @@ N’hésitez pas à **explorer la documentation** ou à effectuer des recherches
 - Interagir avec le DOM
 - Implémenter des fonctionnalités typiques : lecture, pause, lecture aléatoire, barre de progression, etc.
 
+## A. Coder une interface basique
 
-### A. Coder une interface basique
 > Au début de chaque projet, codez seulement une interface basique du projet à réaliser, en ajoutant un peu de style si besoin est. <br>
 > Puis codez les fonctionnalités JavaScript.
 
@@ -43,7 +44,6 @@ N’hésitez pas à **explorer la documentation** ou à effectuer des recherches
 6. Gérer les boutons **“suivant” et “précédent”** pour changer de piste.
 7. Ajouter une fonctionnalité de **lecture aléatoire** (shuffle).
 
-
-### C. Finir l'interface. 🎨
+## C. Finir l'interface. 🎨
 
 Une fois les fonctionnalités JavaScript codées, **ajouter le style manquant** afin de finir **l'implémentation de l'interface**.

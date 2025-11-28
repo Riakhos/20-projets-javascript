@@ -1,6 +1,6 @@
 /* ===========================
-   NAVIGATION PRINCIPALE
-   =========================== */
+  NAVIGATION PRINCIPALE
+  =========================== */
 nav.main-nav {
   background: #222;
   padding: 1em 0;
@@ -83,7 +83,7 @@ nav.main-nav ul li {
   position: relative;
 }
 
-nav.main-nav ul li > a {
+nav.main-nav ul li>a {
   color: #f7df1e;
   text-decoration: none;
   font-weight: bold;
@@ -94,7 +94,7 @@ nav.main-nav ul li > a {
   white-space: nowrap;
 }
 
-nav.main-nav ul li > a:hover {
+nav.main-nav ul li>a:hover {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -102,7 +102,7 @@ nav.main-nav ul li > a:hover {
 }
 
 /* États actifs pour les liens de navigation */
-nav.main-nav ul li > a.active {
+nav.main-nav ul li>a.active {
   background: #f7df1e;
   color: #222;
   transform: scale(1.05);
@@ -146,17 +146,32 @@ nav.main-nav ul li > a.active {
   animation: slideInFromLeft 0.3s ease forwards;
 }
 
-.dropdown.active .dropdown-menu li:nth-child(1) { animation-delay: 0.1s; }
-.dropdown.active .dropdown-menu li:nth-child(2) { animation-delay: 0.15s; }
-.dropdown.active .dropdown-menu li:nth-child(3) { animation-delay: 0.2s; }
-.dropdown.active .dropdown-menu li:nth-child(4) { animation-delay: 0.25s; }
-.dropdown.active .dropdown-menu li:nth-child(5) { animation-delay: 0.3s; }
+.dropdown.active .dropdown-menu li:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.dropdown.active .dropdown-menu li:nth-child(5) {
+  animation-delay: 0.3s;
+}
 
 @keyframes slideInFromLeft {
   from {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -211,8 +226,8 @@ nav.main-nav ul li > a.active {
 }
 
 /* ===========================
-   BASE ET LAYOUT
-   =========================== */
+  BASE ET LAYOUT
+  =========================== */
 *,
 ::before,
 ::after {
@@ -232,99 +247,179 @@ body {
   padding-top: 80px;
 }
 
+/* ===========================
+  APPLICATION QUIZ
+  =========================== */
 .quiz-page {
-  padding: 50px 20px 140px;
-  background-image: radial-gradient(#fcfcfc, #d4e8f9);
+  padding: 120px 20px 140px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 50%, #e0e6ed 100%);
   min-height: 100vh;
 }
 
 .quiz-page__title {
-  font-family: Roboto, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 40px;
   margin-bottom: 82px;
   font-weight: 400;
   letter-spacing: 2px;
   text-align: center;
+  color: #222;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .quiz-page__title--style {
   font-weight: 800;
+  text-shadow: 0 0 15px rgba(247, 223, 30, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
 }
+
 .quiz {
   max-width: 800px;
   margin: 0 auto;
 }
+
 .quiz__question-block {
-  padding: 25px;
+  padding: 30px;
   margin: 40px 0;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 5px 10px rgba(104,104,104,0.5);
+  border-radius: 15px;
+  background: #222;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 15px 3px rgba(247, 223, 30, 0.1);
+  border: 2px solid rgba(247, 223, 30, 0.2);
+  transition: all 0.3s ease;
 }
+
+.quiz__question-block:hover {
+  transform: translateY(-5px);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px 2px #f7df1e, 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 .quiz__question {
   font-size: 21px;
-  font-weight: 500;
-  margin-bottom: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #f7df1e;
+  text-align: left;
 }
+
 .quiz__input-group {
-  margin: 10px 0;
+  margin: 15px 0;
   display: flex;
   align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
 }
+
+.quiz__input-group:hover {
+  background: rgba(247, 223, 30, 0.05);
+}
+
 .quiz__label,
 .quiz__radio-input {
   cursor: pointer;
 }
+
 .quiz__label {
-  font-size: 20px;
+  font-size: 18px;
+  color: #f7df1e33;
+  font-weight: 500;
+  transition: color 0.25s ease;
 }
+
+.quiz__input-group:hover .quiz__label {
+  color: #f7df1e;
+}
+
+.quiz__input-group:has(.quiz__radio-input:checked) .quiz__label {
+  color: #f7df1e;
+  font-weight: 700;
+}
+
 .quiz__radio-input {
   width: 20px;
   height: 20px;
   margin-right: 15px;
+  accent-color: #f7df1e;
+  transform: scale(1.2);
 }
+
 .quiz__form {
   padding-bottom: 40px;
 }
+
 .quiz__submit-button {
   display: block;
   margin: 0 auto;
-  border-radius: 5px;
-  background-color: #fff;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f7df1e 0%, #e6c829 100%);
+  color: #222;
   min-width: 200px;
-  padding: 15px 5px;
+  padding: 18px 30px;
   font-size: 20px;
+  font-weight: 700;
   cursor: pointer;
   border: none;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.2)
+  box-shadow: 0 6px 20px rgba(247, 223, 30, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
+
+.quiz__submit-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(247, 223, 30, 0.6), 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #f7df1e 0%, #f0e455 100%);
+}
+
+.quiz__submit-button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
 .quiz__results {
-  padding: 40px 10px;
-  border-radius: 5px;
-  box-shadow: 0 5px 7px rgba(0,0,0,0.2);
-  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 25px 5px rgba(247, 223, 30, 0.2);
+  background: linear-gradient(135deg, #222 0%, #333 100%);
+  border: 3px solid #f7df1e;
   display: none;
+  position: relative;
+  overflow: hidden;
 }
+
+.quiz__results::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f7df1e 0%, #e6c829 50%, #f7df1e 100%);
+}
+
 .quiz__description {
   text-align: center;
-  font-size: 22px;
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
+  font-size: 24px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  color: #f7df1e;
+  text-shadow: 0 0 12px 2px #f7df1e, 0 2px 8px rgba(247, 223, 30, 0.6);
 }
 
 /* ===========================
-   RESPONSIVE NAVIGATION
-   =========================== */
-@media (width <= 820px) {
+  RESPONSIVE NAVIGATION
+  =========================== */
+@media (width <=820px) {
+
   /* Navigation responsive */
   nav.main-nav .nav-content {
     flex-direction: row;
     padding: 0 0.5em;
   }
-  
+
   .menu-burger {
     display: block !important;
   }
-  
+
   nav.main-nav ul {
     display: none;
     flex-direction: column;
@@ -339,22 +434,22 @@ body {
     margin: 0;
     padding: 0.5em 0;
   }
-  
+
   nav.main-nav ul.open {
     display: flex;
   }
-  
+
   nav.main-nav ul li {
     width: 100%;
     text-align: center;
     border-bottom: 1px solid #444;
   }
-  
+
   nav.main-nav ul li:last-child {
     border-bottom: none;
   }
-  
-  nav.main-nav ul li > a {
+
+  nav.main-nav ul li>a {
     color: #fff !important;
     background: none !important;
     padding: 1em 0;
@@ -364,23 +459,24 @@ body {
     transform: none !important;
     box-shadow: none !important;
   }
-  
-  nav.main-nav ul li > a:hover,
-  nav.main-nav ul li > a.active {
+
+  nav.main-nav ul li>a:hover,
+  nav.main-nav ul li>a.active {
     background: #f7df1e !important;
     color: #222 !important;
   }
-  
+
   /* Ajuster l'espacement pour le menu mobile */
   nav.main-nav ul {
     gap: 0;
-  }  
+  }
 }
 
 /* ===========================
-   RESPONSIVE DROPDOWNS MOBILE - FIX
-   =========================== */
+  RESPONSIVE DROPDOWNS MOBILE - FIX
+  =========================== */
 @media (max-width: 820px) {
+
   /* Force l'affichage des dropdowns en mode modal pour mobile */
   .dropdown-menu {
     position: fixed !important;

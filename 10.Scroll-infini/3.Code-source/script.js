@@ -12,7 +12,7 @@ async function fetchData() {
   errorMsg.textContent = ""
 
   try {
-    const response = await fetch(`https://api.unsplash.com/search/photos?page=${pageIndex}&per_page=30&query=${searchQuery}&client_id=098ZhvnTELBKDlUaPAf0abcAJWdw_LPCBBdPgi7vUcQ`)
+    const response = await fetch(`https://api.unsplash.com/search/photos?page=${pageIndex}&per_page=30&query=${searchQuery}&client_id=qte00mItbA7FO_cTNhW4pMajhEoEHJ6WcDyi4eAUMcI`)
 
     if (!response.ok) throw new Error()
 

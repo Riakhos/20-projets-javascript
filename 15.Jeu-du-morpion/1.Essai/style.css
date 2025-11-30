@@ -837,7 +837,7 @@ nav.main-nav ul li>a.active {
   .board {
     max-width: 260px;
     gap: 6px;
-    margin:  0 0 1rem 0;
+    margin:  0 auto 1rem;
   }
 
   .tictactoe__main-title,

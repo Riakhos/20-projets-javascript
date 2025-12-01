@@ -1,0 +1,12 @@
+<!-- filepath: c:\Users\ricoe\OneDrive\Documents\Developpeur web\javascript\20-projets-javascript\19.Lecteur-audio\1.Essai\ressources\icons\repeat-icon.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <!-- Segment haut: courbe de (4,6) vers (18,6), base de flèche centrée en (18,6) -->
+  <path d="M4 6 C 8.5 2, 13.5 2, 18 6" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Flèche droite: tip (21,6), base corners (18,3) et (18,9) -->
+  <path d="M18 3 L21 6 L18 9" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Segment bas: courbe de (20,18) vers (6,18), base de flèche centrée en (6,18) -->
+  <path d="M20 18 C 15.5 22, 10.5 22, 6 18" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Flèche gauche: tip (3,18), base corners (6,15) et (6,21) -->
+  <path d="M6 15 L3 18 L6 21" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

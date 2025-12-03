@@ -397,11 +397,25 @@ document.addEventListener("DOMContentLoaded", function () {
      * Démarre une nouvelle session de jeu.
      */
     function startGame() {
-        // Toujours réinitialiser le jeu avant de démarrer pour prendre en compte
-        // les changements du sélecteur de nombre de phrases
-        initGame();
-        
-        // Maintenant démarrer la partie
+        // Lire et mettre à jour le nombre de phrases depuis le sélecteur AVANT de démarrer
+        if (phraseCountInput) {
+            const v = Number(phraseCountInput.value);
+            if (!isNaN(v) && v > 0) {
+                const newCount = Math.max(1, Math.min(20, v));
+                // Si le nombre a changé, régénérer la file de phrases
+                if (newCount !== gameState.totalPhrasesPerGame) {
+                    gameState.totalPhrasesPerGame = newCount;
+                    gameState.phrasesQueue = getRandomPhrases(
+                        gameState.totalPhrasesPerGame
+                    );
+                    gameState.currentPhraseIndex = 0;
+                    gameState.currentPhrase = gameState.phrasesQueue[0] || "";
+                    displayPhrase(gameState.currentPhrase, "");
+                    updateProgressUI();
+                }
+            }
+        }
+
         gameState.status = "playing";
 
         if (typingTextarea) {

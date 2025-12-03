@@ -343,9 +343,9 @@ body {
   }
 }
 
-/* ===========================
+/* ==================================
   RESPONSIVE DROPDOWNS MOBILE - FIX
-=========================== */
+================================== */
 @media (max-width: 820px) {
 
   /* Force l'affichage des dropdowns en mode modal pour mobile */
@@ -644,21 +644,26 @@ RESPONSIVE NAVIGATION
 ============================================ */
 
 .player-page {
-  max-width: 1200px;
+  min-height: 100vh;
   width: 100%;
   margin: 2rem auto;
   padding: 1rem;
 }
 
 .audio-player {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 2rem 1.5rem;
   box-sizing: border-box;
   font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   border: 3px solid #28a745;
-  border-radius: 20px;
-  background: #333;
+  border-radius: 30px;
+  background-image: linear-gradient(132deg,
+      #666 6%,
+      #333 61%,
+      #666 95%);
 }
 
 /* Media (caché) */
@@ -679,8 +684,8 @@ RESPONSIVE NAVIGATION
 .audio-player__cover {
   flex-shrink: 0;
   width: 100%;
-  min-height: 350px;
-  border-radius: 12px;
+  max-height: 350px;
+  border-radius: 30px;
   overflow: hidden;
   border: 2px solid #28a745;
   box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
@@ -749,7 +754,6 @@ RESPONSIVE NAVIGATION
   position: relative;
   cursor: pointer;
   border: 1px solid #28a745;
-  overflow: hidden;
   transition: all 0.3s ease;
 }
 
@@ -872,15 +876,21 @@ RESPONSIVE NAVIGATION
   box-shadow: 0 0 12px rgba(255, 165, 0, 0.4);
 }
 
-.audio-player__btn svg:hover {
+.audio-player__btn svg:hover,
+.audio-player__btn svg.active {
   stroke: #ffa500;
   animation: none;
   filter: drop-shadow(0 0 6px rgba(255, 165, 0, 0.6));
 }
 
-.audio-player__btn:focus {
+.audio-player__btn:focus,
+.audio-player__btn.active {
   outline: 3px solid rgba(255, 165, 0, 0.3);
   outline-offset: 2px;
+  background: rgba(255, 165, 0, 0.1);
+  border-color: #ffa500;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 165, 0, 0.4);
 }
 
 .audio-player__btn:disabled {
@@ -914,38 +924,43 @@ RESPONSIVE NAVIGATION
 /* Volume */
 .audio-player__volume {
   width: 160px;
-  /* un peu plus large pour confort */
   height: 8px;
-  /* même hauteur que la progress bar */
   -webkit-appearance: none;
   appearance: none;
-  background: rgba(40, 167, 69, 0.1);
-  /* fond léger vert */
+  background: linear-gradient(90deg,
+      #f7df1e 0%,
+      #ffa500 var(--volume-percent, 100%),
+      rgba(40, 167, 69, 0.1) var(--volume-percent, 100%),
+      rgba(40, 167, 69, 0.1) 100%);
   border: 1px solid #28a745;
-  /* bordure verte */
   border-radius: 10px;
-  /* même arrondi */
   outline: none;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(247, 223, 30, 0.2);
-  /* léger halo jaune */
 }
 
 /* WebKit track */
 .audio-player__volume::-webkit-slider-runnable-track {
   height: 8px;
-  background: rgba(40, 167, 69, 0.1);
+  background: linear-gradient(90deg,
+      #f7df1e 0%,
+      #ffa500 var(--volume-percent, 100%),
+      rgba(40, 167, 69, 0.1) var(--volume-percent, 100%),
+      rgba(40, 167, 69, 0.1) 100%);
   border: 1px solid #28a745;
   border-radius: 10px;
   box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
-  /* reset */
 }
 
 /* Firefox track */
 .audio-player__volume::-moz-range-track {
   height: 8px;
-  background: rgba(40, 167, 69, 0.1);
+  background: linear-gradient(90deg,
+      #f7df1e 0%,
+      #ffa500 var(--volume-percent, 100%),
+      rgba(40, 167, 69, 0.1) var(--volume-percent, 100%),
+      rgba(40, 167, 69, 0.1) 100%);
   border: 1px solid #28a745;
   border-radius: 10px;
 }
@@ -968,17 +983,12 @@ RESPONSIVE NAVIGATION
   width: 16px;
   height: 16px;
   background: linear-gradient(90deg, #f7df1e, #ffa500);
-  /* jaune→orange */
   border: 2px solid #28a745;
-  /* bordure verte */
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  /* comme le handle */
   transition: all 0.2s ease;
-  /* positionner au centre vertical du track */
   margin-top: -4px;
-  /* ajuste l’alignement sur certains WebKit */
 }
 
 .audio-player__volume::-webkit-slider-thumb:hover {
@@ -1089,10 +1099,14 @@ RESPONSIVE NAVIGATION
 }
 
 .audio-player__item {
-  display: flex;
+  /* Remplacer flex par grid pour alignement vertical des durées */
+  display: grid;
+  grid-template-columns: 1fr 8fr auto;
+  /* col1: titre+artiste (flex), col2: artiste, col3: durée (fixe) */
+  gap: 1rem;
   align-items: center;
-  justify-content: space-between;
   padding: 0.8rem 1rem;
+  margin-bottom: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
   border: 1px solid transparent;
@@ -1114,13 +1128,16 @@ RESPONSIVE NAVIGATION
 }
 
 .audio-player__item.active {
-  background: rgba(40, 167, 69, 0.2);
-  border-color: #28a745;
+  background: rgba(255, 165, 0, 0.1);
+  border-color: #ffa500;
+  color: #ffa500;
+  box-shadow: 0 0 12px rgba(255, 165, 0, 0.6);
 }
 
 .audio-player__item-title {
   font-weight: 600;
   font-size: 0.95rem;
+  text-align: left;
   background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -1137,8 +1154,10 @@ RESPONSIVE NAVIGATION
 
 .audio-player__item-duration {
   font-size: 0.85rem;
-  color: #666;
+  color: #999;
   font-weight: 500;
+  min-width: 50px;
+  text-align: right;
 }
 
 /* Responsive */

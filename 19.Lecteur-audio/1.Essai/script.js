@@ -123,9 +123,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ===============================================
-              LECTEUR AUDIO
-              Interface basique + contrôles personnalisés
-          ================================================ */
+        LECTEUR AUDIO
+        Interface basique + contrôles personnalisés
+    ================================================ */
 
     // ===========================
     // SÉLECTIONS DOM
@@ -277,6 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <path d="M5 3l14 9-14 9V3z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 `;
             }
+            playBtn.classList.toggle("active", false);
         }
     }
 
@@ -370,6 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <path d="M11 5 L7 9 H4 V15 H7 L11 19 V5 Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M16 9 L20 15 M20 9 L16 15" stroke-width="2" stroke-linecap="round"/>
             `;
+            muteBtn.classList.toggle("active", true);
         } else {
             // Icône unmute : haut-parleur + ondes
             svg.innerHTML = `
@@ -377,6 +379,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <path d="M14 9 C16 11,16 13,14 15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M16 7 C19 10,19 14,16 17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             `;
+            muteBtn.classList.toggle("active", false);
         }
     }
 

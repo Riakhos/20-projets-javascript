@@ -159,9 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ===============================================
-          LECTEUR AUDIO
-          Interface basique + contrôles personnalisés
-      ================================================ */
+        LECTEUR AUDIO
+        Interface basique + contrôles personnalisés
+    ================================================ */
 
     // ===========================
     // SÉLECTIONS DOM
@@ -186,6 +186,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const timeTotal = document.querySelector(".js-time-total");
 
     const playlistUl = document.querySelector(".js-playlist");
+
+    const loader = document.querySelector(".loader");
+    const scrollToTopBtn = document.querySelector(".scroll-to-top-button");
 
     // ===========================
     // ÉTAT DU LECTEUR

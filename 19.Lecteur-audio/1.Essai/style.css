@@ -877,9 +877,10 @@ RESPONSIVE NAVIGATION
   height: 20px;
 }
 
-/* Animation shimmer sur stroke (classe .feather) */
+/* Animation shimmer sur stroke + fill (classe .feather) */
 .feather {
   stroke: #f7df1e;
+  fill: #f7df1e;
   animation: shimmer-stroke 3s ease-in-out infinite;
 }
 
@@ -888,10 +889,12 @@ RESPONSIVE NAVIGATION
   0%,
   100% {
     stroke: #f7df1e;
+    fill: #f7df1e;
   }
 
   50% {
     stroke: #ffa500;
+    fill: #ffa500;
   }
 }
 
@@ -1191,4 +1194,81 @@ RESPONSIVE NAVIGATION
   color: #999;
   font-weight: 500;
   min-width: 50px;
+}
+
+/* ===========================
+  INDICATEUR DE CHARGEMENT
+  =========================== */
+
+/* Modal de chargement */
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 0 12px rgba(255, 165, 0, 0.6);
+  border: 2px solid #28a745;
+  border-radius: 10px;
+  background: rgba(40, 167, 69, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-out, visibility 0.4s;
+  z-index: 2000;
+}
+
+/* État actif du loader */
+.js-active-loader {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Texte du loader */
+.loader__text {
+  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Animation de rotation du loader */
+.loader__loading-animation {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  border: 4px solid rgba(40, 167, 69, 0.3);
+  border-top-color: #f7df1e;
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+/* Keyframes pour l'animation de rotation */
+@keyframes rotation {
+  100% {
+    rotate: 360deg;
+  }
+}
+
+/* ===========================
+  BOUTON RETOUR EN HAUT DE PAGE
+  =========================== */
+
+/* Bouton scroll to top */
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  /* État initial caché */
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1500;
 }

@@ -1,9 +1,45 @@
-const musicsData = [
-    { title: "Solar", artist: "Betical", id: 1, duration: "5:38" },
-    { title: "Electric-Feel", artist: "TEEMID", id: 2, duration: "3:33" },
-    { title: "Aurora", artist: "SLUMB", id: 3, duration: "4:32" },
-    { title: "Lost-Colours", artist: "Fakear", id: 4, duration: "3:39" },
+// Les informations de l'API Jamendo sont chargées depuis config.js
+// Assurez-vous d'inclure config.js avant script.js dans index.html
+
+// Stockage des morceaux récupérés depuis l'API
+// Initialisation avec morceaux de démo pour affichage immédiat
+let musicsData = [
+    {
+        title: "Solar",
+        artist: "Betical",
+        id: 1,
+        duration: "5:38",
+        audioUrl: "ressources/music/Solar.mp3",
+        image: "./ressources/thumbs/Solar.png",
+    },
+    {
+        title: "Electric-Feel",
+        artist: "TEEMID",
+        id: 2,
+        duration: "3:33",
+        audioUrl: "ressources/music/Electric-Feel.mp3",
+        image: "./ressources/thumbs/Electric-Feel.png",
+    },
+    {
+        title: "Aurora",
+        artist: "SLUMB",
+        id: 3,
+        duration: "4:32",
+        audioUrl: "ressources/music/Aurora.mp3",
+        image: "./ressources/thumbs/Aurora.png",
+    },
+    {
+        title: "Lost-Colours",
+        artist: "Fakear",
+        id: 4,
+        duration: "3:39",
+        audioUrl: "ressources/music/Lost-Colours.mp3",
+        image: "./ressources/thumbs/Lost-Colours.png",
+    },
 ];
+let isLoadingFromAPI = false;
+let apiOffset = 0;
+const apiLimit = 20; // Nombre de morceaux par requête API
 
 // ===========================
 // GESTION NAVIGATION
@@ -123,9 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ===============================================
-        LECTEUR AUDIO
-        Interface basique + contrôles personnalisés
-    ================================================ */
+          LECTEUR AUDIO
+          Interface basique + contrôles personnalisés
+      ================================================ */
 
     // ===========================
     // SÉLECTIONS DOM
@@ -159,9 +195,105 @@ document.addEventListener("DOMContentLoaded", function () {
     let isRepeatOn = false;
     let isDraggingProgress = false;
 
+    // Pagination pour scroll infini
+    let displayedTracksCount = 0;
+    const tracksPerPage = 10;
+    let playlistObserver = null;
+
     // ===========================
     // UTILITAIRES
     // ===========================
+
+    /**
+     * Récupère des morceaux depuis l'API Jamendo.
+     * @param {number} limit - Nombre de morceaux à récupérer
+     * @param {number} offset - Décalage pour la pagination
+     * @returns {Promise<Array>} - Liste des morceaux formatés
+     */
+    async function fetchTracksFromAPI(limit = 20, offset = 0) {
+        if (isLoadingFromAPI) return [];
+
+        isLoadingFromAPI = true;
+
+        try {
+            // Vérifier que la configuration API est chargée
+            if (!window.API_CONFIG || !window.API_CONFIG.CLIENT_ID) {
+                throw new Error(
+                    "Configuration API manquante. Vérifiez que config.js est chargé."
+                );
+            }
+
+            const params = new URLSearchParams({
+                client_id: window.API_CONFIG.CLIENT_ID,
+                format: "json",
+                limit: limit,
+                offset: offset,
+                order: "popularity_total",
+                include: "musicinfo",
+                audioformat: "mp32", // Format MP3
+            });
+
+            const response = await fetch(`${window.API_CONFIG.API_URL}/?${params}`);
+
+            if (!response.ok) {
+                throw new Error(`Erreur API: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // Formater les données pour correspondre à notre structure
+            const tracks = data.results.map((track, index) => ({
+                id: track.id,
+                title: track.name,
+                artist: track.artist_name,
+                duration: formatTime(track.duration),
+                audioUrl: track.audio, // URL du fichier audio
+                image: track.image, // URL de la pochette
+                album: track.album_name,
+            }));
+
+            return tracks;
+        } catch (error) {
+            console.error("Erreur lors du chargement des morceaux:", error);
+            // En cas d'erreur, retourner des données de démo
+            return [
+                {
+                    title: "Solar",
+                    artist: "Betical",
+                    id: 1,
+                    duration: "5:38",
+                    audioUrl: "ressources/music/Solar.mp3",
+                    image: "./ressources/thumbs/Solar.png",
+                },
+                {
+                    title: "Electric-Feel",
+                    artist: "TEEMID",
+                    id: 2,
+                    duration: "3:33",
+                    audioUrl: "ressources/music/Electric-Feel.mp3",
+                    image: "./ressources/thumbs/Electric-Feel.png",
+                },
+                {
+                    title: "Aurora",
+                    artist: "SLUMB",
+                    id: 3,
+                    duration: "4:32",
+                    audioUrl: "ressources/music/Aurora.mp3",
+                    image: "./ressources/thumbs/Aurora.png",
+                },
+                {
+                    title: "Lost-Colours",
+                    artist: "Fakear",
+                    id: 4,
+                    duration: "3:39",
+                    audioUrl: "ressources/music/Lost-Colours.mp3",
+                    image: "./ressources/thumbs/Lost-Colours.png",
+                },
+            ];
+        } finally {
+            isLoadingFromAPI = false;
+        }
+    }
 
     /**
      * Formate un temps en secondes au format mm:ss.
@@ -183,10 +315,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const track = musicsData[currentIndex];
         if (!track) return;
 
-        audio.src = `ressources/music/${track.title}.mp3`;
+        // Utiliser l'URL de l'API ou le chemin local en fallback
+        audio.src = track.audioUrl || `ressources/music/${track.title}.mp3`;
         if (titleEl) titleEl.textContent = track.title;
         if (artistEl) artistEl.textContent = track.artist;
-        if (coverEl) coverEl.src = `./ressources/thumbs/${track.title}.png`;
+        if (coverEl)
+            coverEl.src = track.image || `./ressources/thumbs/${track.title}.png`;
 
         // Mettre à jour l'item actif dans la playlist
         document.querySelectorAll(".js-track").forEach((item, idx) => {
@@ -205,13 +339,63 @@ document.addEventListener("DOMContentLoaded", function () {
     /**
      * Génère les items de la playlist (ul.js-playlist) à partir de musicsData.
      * Ajoute les gestionnaires de clic pour chaque piste.
+     * Utilise un système de scroll infini pour charger 10 morceaux à la fois.
      */
-    function renderPlaylist() {
+    async function renderPlaylist() {
         if (!playlistUl) return;
+
+        // Afficher les 10 premiers morceaux (démo initialement)
         playlistUl.textContent = "";
+        displayedTracksCount = 0;
+
+        // Charger la première page
+        loadMoreTracks();
+
+        // Créer un marqueur pour l'IntersectionObserver
+        const marker = document.createElement("li");
+        marker.className = "audio-player__playlist-marker";
+        marker.style.height = "1px";
+        marker.style.visibility = "hidden";
+        playlistUl.appendChild(marker);
+
+        // Configurer l'IntersectionObserver pour le scroll infini
+        if (playlistObserver) {
+            playlistObserver.disconnect();
+        }
+
+        // Charger les morceaux de l'API en arrière-plan (sans bloquer l'affichage)
+        fetchTracksFromAPI(apiLimit, apiOffset).then((tracks) => {
+            if (tracks.length > 0) {
+                musicsData = [...musicsData, ...tracks];
+                apiOffset += tracks.length;
+            }
+        });
+
+        playlistObserver = new IntersectionObserver(handlePlaylistScroll, {
+            root: playlistUl.parentElement,
+            rootMargin: "100px",
+        });
+
+        playlistObserver.observe(marker);
+    }
+
+    /**
+     * Charge les 10 prochains morceaux dans la playlist.
+     */
+    function loadMoreTracks() {
+        if (!playlistUl) return;
+
+        const start = displayedTracksCount;
+        const end = Math.min(start + tracksPerPage, musicsData.length);
+
+        // Si on a déjà tout affiché, ne rien faire
+        if (start >= musicsData.length) return;
 
         const fragment = document.createDocumentFragment();
-        musicsData.forEach((track, index) => {
+        const marker = playlistUl.querySelector(".audio-player__playlist-marker");
+
+        for (let index = start; index < end; index++) {
+            const track = musicsData[index];
             const li = document.createElement("li");
             li.className = "audio-player__item js-track";
             li.tabIndex = 0;
@@ -231,9 +415,38 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             fragment.appendChild(li);
-        });
+        }
 
-        playlistUl.appendChild(fragment);
+        // Insérer avant le marqueur
+        if (marker) {
+            playlistUl.insertBefore(fragment, marker);
+        } else {
+            playlistUl.appendChild(fragment);
+        }
+
+        displayedTracksCount = end;
+    }
+
+    /**
+     * Gère le scroll infini de la playlist avec IntersectionObserver.
+     * Charge plus de morceaux depuis l'API si nécessaire.
+     * @param {IntersectionObserverEntry[]} entries
+     */
+    async function handlePlaylistScroll(entries) {
+        if (!entries[0].isIntersecting) return;
+
+        // Si on a affiché tous les morceaux actuels, en charger plus depuis l'API
+        if (displayedTracksCount >= musicsData.length && !isLoadingFromAPI) {
+            const newTracks = await fetchTracksFromAPI(apiLimit, apiOffset);
+            if (newTracks.length > 0) {
+                musicsData = [...musicsData, ...newTracks];
+                apiOffset += newTracks.length;
+                loadMoreTracks();
+            }
+        } else if (displayedTracksCount < musicsData.length) {
+            // Sinon, charger les morceaux déjà récupérés
+            loadMoreTracks();
+        }
     }
 
     // ===========================
@@ -535,10 +748,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // INITIALISATION
     // ===========================
 
-    // Générer la playlist au chargement
-    renderPlaylist();
-    // Charger la première piste (sans jouer)
-    loadTrack();
+    // Générer la playlist au chargement puis charger la première piste
+    async function init() {
+        await renderPlaylist();
+        loadTrack();
+    }
+    init();
 
     // Initialiser l'affichage du volume
     if (volumeSlider) {

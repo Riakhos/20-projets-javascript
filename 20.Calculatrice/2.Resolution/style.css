@@ -78,6 +78,7 @@ body {
 .calculator__button[data-action="ce"] {
   grid-column: span 2;
 }
+
 .calculator__button[data-action="="] {
   grid-column: span 2;
   font-weight: 400;

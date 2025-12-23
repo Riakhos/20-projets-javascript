@@ -159,9 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* ===============================================
-          LECTEUR AUDIO
-          Interface basique + contrôles personnalisés
-      ================================================ */
+        LECTEUR AUDIO
+        Interface basique + contrôles personnalisés
+    ================================================ */
 
     // ===========================
     // SÉLECTIONS DOM
@@ -186,6 +186,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const timeTotal = document.querySelector(".js-time-total");
 
     const playlistUl = document.querySelector(".js-playlist");
+    const loader = document.querySelector(".loader");
+    const scrollToTopBtn = document.querySelector(".scroll-to-top-button");
+    const playlistContainer = document.querySelector(".audio-player__playlist");
 
     // ===========================
     // ÉTAT DU LECTEUR
@@ -205,6 +208,31 @@ document.addEventListener("DOMContentLoaded", function () {
     // ===========================
 
     /**
+     * Affiche ou masque le loader en ajoutant/retirant la classe js-active-loader.
+     * @param {boolean} show - true pour afficher, false pour masquer
+     */
+    function toggleLoader(show) {
+        if (!loader) return;
+        if (show) {
+            loader.classList.add("js-active-loader");
+        } else {
+            loader.classList.remove("js-active-loader");
+        }
+    }
+
+    /**
+     * Fait remonter le scroll de la playlist vers le haut (smooth).
+     * Utilise scrollTo sur le conteneur de la playlist.
+     */
+    function scrollToTop() {
+        if (!playlistContainer) return;
+        playlistContainer.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }
+
+    /**
      * Récupère des morceaux depuis l'API Jamendo.
      * @param {number} limit - Nombre de morceaux à récupérer
      * @param {number} offset - Décalage pour la pagination
@@ -214,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (isLoadingFromAPI) return [];
 
         isLoadingFromAPI = true;
+        toggleLoader(true); // Afficher le loader avant l'appel API
 
         try {
             // Vérifier que la configuration API est chargée
@@ -255,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return tracks;
         } catch (error) {
             console.error("Erreur lors du chargement des morceaux:", error);
-            // En cas d'erreur, retourner des données de démo
+            // Retourner données de démo en cas d'erreur
             return [
                 {
                     title: "Solar",
@@ -292,6 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ];
         } finally {
             isLoadingFromAPI = false;
+            toggleLoader(false); // Masquer le loader après réception
         }
     }
 
@@ -437,12 +467,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Si on a affiché tous les morceaux actuels, en charger plus depuis l'API
         if (displayedTracksCount >= musicsData.length && !isLoadingFromAPI) {
+            toggleLoader(true);
             const newTracks = await fetchTracksFromAPI(apiLimit, apiOffset);
             if (newTracks.length > 0) {
                 musicsData = [...musicsData, ...newTracks];
                 apiOffset += newTracks.length;
                 loadMoreTracks();
             }
+            toggleLoader(false);
         } else if (displayedTracksCount < musicsData.length) {
             // Sinon, charger les morceaux déjà récupérés
             loadMoreTracks();
@@ -750,8 +782,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Générer la playlist au chargement puis charger la première piste
     async function init() {
+        toggleLoader(true);
         await renderPlaylist();
         loadTrack();
+        toggleLoader(false);
     }
     init();
 
@@ -759,6 +793,31 @@ document.addEventListener("DOMContentLoaded", function () {
     if (volumeSlider) {
         const initialVolume = audio.volume * 80;
         volumeSlider.style.setProperty("--volume-percent", `${initialVolume}%`);
+    }
+
+    // ===========================
+    // GESTION BOUTON SCROLL TO TOP
+    // ===========================
+
+    // Afficher/masquer le bouton scroll-to-top selon la position dans la playlist
+    if (scrollToTopBtn && playlistContainer) {
+        // Initialiser le bouton comme caché
+        scrollToTopBtn.style.opacity = "0";
+        scrollToTopBtn.style.visibility = "hidden";
+
+        // Écouteur sur le scroll de la playlist
+        playlistContainer.addEventListener("scroll", () => {
+            if (playlistContainer.scrollTop > 100) {
+                scrollToTopBtn.style.opacity = "1";
+                scrollToTopBtn.style.visibility = "visible";
+            } else {
+                scrollToTopBtn.style.opacity = "0";
+                scrollToTopBtn.style.visibility = "hidden";
+            }
+        });
+
+        // Clic sur le bouton → remonter en haut
+        scrollToTopBtn.addEventListener("click", scrollToTop);
     }
 
     // Écouteurs — boutons principaux

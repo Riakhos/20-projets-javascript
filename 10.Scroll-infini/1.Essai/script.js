@@ -1,3 +1,4 @@
+
 // ===========================
 // GESTION NAVIGATION
 // ===========================
@@ -172,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ÉTAPE 2 : FONCTIONS UTILITAIRES
     // ===========================
 
-    // TODO: Fonction pour afficher/masquer le loader
+    // Fonction pour afficher/masquer le loader
     function toggleLoader(show) {
         // Ajouter ou retirer la classe 'js-active-loader'
         if (show) {

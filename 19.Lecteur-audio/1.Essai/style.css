@@ -250,14 +250,7 @@ nav.main-nav ul li>a.active {
 
 body {
   font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
   background: linear-gradient(90deg, #f7df1e, #ffa500, #f7df1e);
-  /* background-size: 200% 100%;
-  animation: shimmer 5s ease-in-out infinite;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;; */
   margin: 0;
   padding: 0;
   color: #222;
